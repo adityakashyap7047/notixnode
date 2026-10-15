@@ -53,8 +53,6 @@ const WEBSITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://notixnode.vercel
 const DISCORD_INVITE = "https://discord.gg/8NPerTzmKR";
 const YOUTUBE_URL = "https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w";
 const BRAND_COLOR = 0xC5A059; // Champagne Gold
-const FLOATINGNODE_HOST = "free-ca.floatingnode.bond:25565";
-const FLOATINGNODE_SFTP = "free-ca.floatingnode.bond:2022";
 
 if (!TOKEN) {
   console.error("❌ ERROR: DISCORD_BOT_TOKEN is not defined in environment or .env.local");
@@ -195,7 +193,7 @@ const commands = [
 
   new SlashCommandBuilder()
     .setName("status")
-    .setDescription("Check live NOTIXNODE website, FloatingNode Minecraft server & API status"),
+    .setDescription("Check live NOTIXNODE website, infrastructure & API operational status"),
 
   new SlashCommandBuilder()
     .setName("tools")
@@ -619,8 +617,7 @@ async function executeFullServerSetup(guild, executor, clearOld = true, progress
         `• 🌐 **Platform Website:** [notixnode.vercel.app](${WEBSITE_URL})\n` +
         `• 📺 **YouTube Channel:** [youtube.com/@os_notixnode](${YOUTUBE_URL})\n` +
         `• 💬 **Discord Community:** [discord.gg/8NPerTzmKR](${DISCORD_INVITE})\n` +
-        `• ⚡ **Live Status:** [notixnode.vercel.app/status](${WEBSITE_URL}/status)\n` +
-        `• 🖳 **FloatingNode Server:** \`${FLOATINGNODE_HOST}\``
+        `• ⚡ **Live Status:** [notixnode.vercel.app/status](${WEBSITE_URL}/status)`
       )
       .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Official Touchpoints", iconURL: client.user.displayAvatarURL() });
 
@@ -737,21 +734,19 @@ async function executeFullServerSetup(guild, executor, clearOld = true, progress
 async function generateAssistantResponse(query, user, channel) {
   const q = query.toLowerCase();
 
-  // 1. Hosting / Server IP / FloatingNode
-  if (q.includes("ip") || q.includes("host") || q.includes("server") || q.includes("floatingnode") || q.includes("node") || q.includes("port") || q.includes("specs") || q.includes("sftp")) {
+  // 1. Hosting / Server IP / Infrastructure Security
+  if (q.includes("ip") || q.includes("host") || q.includes("server") || q.includes("floatingnode") || q.includes("node") || q.includes("port") || q.includes("specs") || q.includes("sftp") || q.includes("hardware")) {
     return {
-      title: "🖳 FloatingNode Minecraft Server Details",
+      title: "🛡️ NOTIXNODE Infrastructure & Security Notice",
       description: 
-        `Here are the official technical details for our connected Minecraft node:\n\n` +
-        `• 🌐 **Server Host:** \`${FLOATINGNODE_HOST}\`\n` +
-        `• 🔌 **Port:** \`25565\` (Minecraft Java Edition)\n` +
-        `• 📁 **SFTP Port:** \`${FLOATINGNODE_SFTP}\` (Credentials available in Pterodactyl)\n` +
-        `• ⚡ **Specs:** 5 vCores (500% CPU Allocation), 12.7 GiB DDR4 RAM, 39 GB NVMe Storage\n` +
-        `• 📍 **Location:** North America (Canada Node CA)\n` +
-        `• 📊 **Live Telemetry:** Check real-time ping on our [Status Dashboard](${WEBSITE_URL}/status).`,
+        `• 🌐 **Platform Network:** NOTIXNODE Enterprise Infrastructure\n` +
+        `• ⚡ **Cluster Status:** Operational 🟢\n` +
+        `• 🔒 **Security Protocol:** Direct server IPs, backend addresses, SFTP ports, and server credentials are confidential and protected under network security policy.\n\n` +
+        `🔐 **Authorized Administrator Access:**\n` +
+        `If you are an authorized administrator needing server management or credentials, please access your private panel dashboard or open a ticket in **#open-ticket** for staff assistance.`,
       buttons: [
         new ButtonBuilder().setLabel("Live Status Dashboard").setStyle(ButtonStyle.Link).setURL(`${WEBSITE_URL}/status`),
-        new ButtonBuilder().setLabel("Support Ticket").setStyle(ButtonStyle.Link).setURL(DISCORD_INVITE)
+        new ButtonBuilder().setLabel("Open Support Ticket").setStyle(ButtonStyle.Link).setURL(DISCORD_INVITE)
       ]
     };
   }
@@ -1175,8 +1170,8 @@ client.on("interactionCreate", async (interaction) => {
           { name: "📦 Indexed Resources", value: `${resourceCount} Resources`, inline: true },
           { name: "🔒 Security Tier", value: "Verified & Hardened", inline: true },
           { 
-            name: "🖳 FloatingNode Server (Node CA)", 
-            value: `• **Hostname:** \`${FLOATINGNODE_HOST}\`\n• **Status:** ${mcOnline ? "Online 🟢" : "Standby / Active 🟢"} (${mcPing}ms)\n• **Specs:** 500% CPU (5 vCores) | 12.7 GiB RAM | 39 GB NVMe\n• **SFTP:** \`sftp://${FLOATINGNODE_SFTP}\` (#5b9d2890)`, 
+            name: "🖳 Enterprise Node Cluster", 
+            value: `• **Status:** Operational 🟢\n• **DDoS Mitigation:** Layer 4/7 Active\n• **Cluster Region:** North America East (Tier-4 Datacenter)\n• **Telemetry:** Real-time health metrics available on website`, 
             inline: false 
           }
         )
@@ -1360,7 +1355,7 @@ client.on("messageCreate", async (message) => {
   }
 
   if (lower === "!status") {
-    return message.reply(`⚡ **𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 System Status:**\n• Platform: ${WEBSITE_URL} | Ping: ${client.ws.ping}ms\n• Node Server: \`${FLOATINGNODE_HOST}\` (Node CA, 500% CPU, 12.7GB RAM)\n• Live Dashboard: ${WEBSITE_URL}/status`).catch(() => {});
+    return message.reply(`⚡ **𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 System Status:**\n• Platform: ${WEBSITE_URL} | Ping: ${client.ws.ping}ms\n• Cluster Status: Operational 🟢\n• Live Dashboard: ${WEBSITE_URL}/status`).catch(() => {});
   }
 });
 
