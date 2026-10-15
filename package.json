@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test tests/data-layer.test.mjs tests/security-integration.test.mjs"
+    "test": "node --test tests/data-layer.test.mjs tests/security-integration.test.mjs",
+    "bot": "node bot/index.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "clsx": "^2.1.1",
+    "discord.js": "^14.27.0",
     "lucide-react": "^1.57.0",
     "next": "16.4.0",
     "react": "19.3.0",
