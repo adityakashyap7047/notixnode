@@ -9,11 +9,12 @@ import { Separator } from "@/components/ui/Separator";
 import { Copy, Download, ChevronRight, ChevronLeft, Check, AlertTriangle, Plus, Minus, Palette, Hash, SlidersHorizontal } from "lucide-react";
 
 const gradientPresets = [
+  { name: "Crimson", colors: ["#FF1E27", "#FFFFFF"] },
+  { name: "Fire", colors: ["#FF1E27", "#FFAA00"] },
   { name: "Ocean", colors: ["#06B6D4", "#00F5D4"] },
   { name: "Sunset", colors: ["#F59E0B", "#EF4444"] },
   { name: "Forest", colors: ["#10B981", "#06B6D4"] },
   { name: "Royal", colors: ["#8B5CF6", "#EC4899"] },
-  { name: "Fire", colors: ["#EF4444", "#F97316"] },
   { name: "Ice", colors: ["#06B6D4", "#FFFFFF"] },
 ];
 
@@ -74,10 +75,10 @@ function renderPreview(text: string): string {
 }
 
 export default function PrefixPreviewer() {
-  const [prefix, setPrefix] = useState("<gradient:#06B6D4:#00F5D4>Admin</gradient> ");
+  const [prefix, setPrefix] = useState("<gradient:#FF1E27:#FFFFFF>Admin</gradient> ");
   const [suffix, setSuffix] = useState("");
   const [format, setFormat] = useState<"luckperms" | "essentials" | "placeholderapi">("luckperms");
-  const [gradientColors, setGradientColors] = useState(["#06B6D4", "#00F5D4"]);
+  const [gradientColors, setGradientColors] = useState(["#FF1E27", "#FFFFFF"]);
   const [copied, setCopied] = useState(false);
 
   const preview = useMemo(() => renderPreview(prefix + suffix), [prefix, suffix]);

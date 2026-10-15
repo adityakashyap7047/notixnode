@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 const presets = [
   { name: "Default Vanilla", format: "legacy", content: "A Minecraft Server" },
   { name: "Paper Optimized", format: "legacy", content: "&6&lPaperMC &7| &fOptimized for Performance" },
-  { name: "MiniMessage Gradient", format: "minimessage", content: "<gradient:#06B6D4:#00F5D4>NOTIXNODE</gradient> <gray>|</gray> <white>Premium Resources</white>" },
+  { name: "MiniMessage Gradient", format: "minimessage", content: "<gradient:#FF1E27:#FFFFFF>NOTIXNODE</gradient> <gray>|</gray> <white>Premium Resources</white>" },
   { name: "JSON Legacy", format: "json", content: '{"text":"Welcome to ","color":"white","extra":[{"text":"My Server","color":"gold","bold":true}]}' },
   { name: "Bedrock Compatible", format: "legacy", content: "&b&lBedrock &7& &9&lJava &7| &fCrossplay Enabled" },
 ];

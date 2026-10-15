@@ -78,18 +78,19 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card/50" role="contentinfo">
+    <footer className="border-t border-white/10 bg-black" role="contentinfo">
       <div className="container py-12 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           <div className="col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4" aria-label="NOTIXNODE Home">
-              <svg className="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <rect width="32" height="32" rx="8" fill="currentColor" />
-                <path d="M8 16L14 22L24 10" stroke="#0B0F19" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span className="font-bold text-xl text-foreground">NOTIXNODE</span>
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="NOTIXNODE Home">
+              <div className="h-8 w-8 rounded-full bg-[#FF1E27] flex items-center justify-center shadow-[0_0_15px_rgba(255,30,39,0.5)]">
+                <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span className="font-extrabold text-xl tracking-wider text-white">NOTIX<span className="text-[#FF1E27]">NODE</span></span>
             </Link>
-            <p className="text-sm text-muted-foreground mb-4 max-w-xs">
+            <p className="text-sm text-neutral-400 mb-4 max-w-xs">
               Premium Minecraft server development resources, configurations, graphics, maps, and tools for professional server administrators and developers.
             </p>
             <div className="flex gap-4">
@@ -99,7 +100,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-neutral-400 hover:text-[#FF1E27] transition-colors"
                   aria-label={social.name}
                 >
                   <social.icon className="h-5 w-5" />
