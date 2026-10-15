@@ -131,11 +131,11 @@ export default function AboutPage() {
             Contribute, audit, or fork — we welcome it.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="https://github.com/notixnode" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 btn-secondary">
+            <a href="https://github.com/adityakashyap7047/notixnode" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 btn-secondary">
               <GithubIcon className="h-5 w-5" aria-hidden="true" />
               View on GitHub
             </a>
-            <a href="https://discord.gg/notixnode" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 btn-outline">
+            <a href="https://discord.gg/8NPerTzmKR" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 btn-outline">
               <DiscordIcon className="h-5 w-5" aria-hidden="true" />
               Join Discord
             </a>

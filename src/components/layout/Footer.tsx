@@ -62,16 +62,16 @@ const footerLinks = {
     { name: "Affiliate Disclosure", href: "/affiliate-disclosure" },
   ],
   community: [
-    { name: "Discord", href: "https://discord.gg/notixnode", external: true },
-    { name: "GitHub", href: "https://github.com/notixnode", external: true },
+    { name: "Discord", href: "https://discord.gg/8NPerTzmKR", external: true },
+    { name: "GitHub", href: "https://github.com/adityakashyap7047/notixnode", external: true },
     { name: "Twitter", href: "https://twitter.com/notixnode", external: true },
     { name: "YouTube", href: "https://youtube.com/@notixnode", external: true },
   ],
 };
 
 const socialLinks = [
-  { name: "Discord", icon: DiscordIcon, href: "https://discord.gg/notixnode" },
-  { name: "GitHub", icon: GithubIcon, href: "https://github.com/notixnode" },
+  { name: "Discord", icon: DiscordIcon, href: "https://discord.gg/8NPerTzmKR" },
+  { name: "GitHub", icon: GithubIcon, href: "https://github.com/adityakashyap7047/notixnode" },
   { name: "Twitter", icon: TwitterIcon, href: "https://twitter.com/notixnode" },
   { name: "YouTube", icon: YoutubeIcon, href: "https://youtube.com/@notixnode" },
 ];

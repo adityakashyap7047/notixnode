@@ -10,8 +10,8 @@ import { Mail, MessageSquare, GitBranch, X, MapPin, Clock, CheckCircle, AlertCir
 
 const contactMethods = [
   { icon: Mail, title: "Email", value: "support@notixnode.com", description: "General inquiries, billing, partnerships", action: "mailto:support@notixnode.com" },
-  { icon: MessageSquare, title: "Discord", value: "discord.gg/notixnode", description: "Community support, feature requests, chat", action: "https://discord.gg/notixnode" },
-  { icon: GitBranch, title: "GitHub", value: "github.com/notixnode", description: "Bug reports, feature requests, contributions", action: "https://github.com/notixnode" },
+  { icon: MessageSquare, title: "Discord", value: "discord.gg/8NPerTzmKR", description: "Community support, feature requests, chat", action: "https://discord.gg/8NPerTzmKR" },
+  { icon: GitBranch, title: "GitHub", value: "github.com/adityakashyap7047/notixnode", description: "Bug reports, feature requests, contributions", action: "https://github.com/adityakashyap7047/notixnode" },
   { icon: X, title: "Twitter/X", value: "@notixnode", description: "Announcements, updates, quick questions", action: "https://twitter.com/notixnode" },
 ];
 
