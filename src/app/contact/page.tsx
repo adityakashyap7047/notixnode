@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Separator } from "@/components/ui/Separator";
-import { Mail, MessageSquare, GitBranch, X, MapPin, Clock, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Mail, MessageSquare, GitBranch, Video, X, MapPin, Clock, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
 const contactMethods = [
   { icon: Mail, title: "Email", value: "support@notixnode.com", description: "General inquiries, billing, partnerships", action: "mailto:support@notixnode.com" },
   { icon: MessageSquare, title: "Discord", value: "discord.gg/8NPerTzmKR", description: "Community support, feature requests, chat", action: "https://discord.gg/8NPerTzmKR" },
+  { icon: Video, title: "YouTube", value: "@os_notixnode", description: "Video tutorials, walkthroughs, devlogs", action: "https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w" },
   { icon: GitBranch, title: "GitHub", value: "github.com/adityakashyap7047/notixnode", description: "Bug reports, feature requests, contributions", action: "https://github.com/adityakashyap7047/notixnode" },
-  { icon: X, title: "Twitter/X", value: "@notixnode", description: "Announcements, updates, quick questions", action: "https://twitter.com/notixnode" },
 ];
 
 const faqs = [

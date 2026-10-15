@@ -30,6 +30,14 @@ function TwitterIcon({ className }: { className?: string }) {
   );
 }
 
+function YoutubeIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+  );
+}
+
 const team = [
   { name: "Alex Chen", role: "Founder & Lead Developer", bio: "10+ years Minecraft server development. PaperMC contributor. Former network admin for 50k+ player network.", avatar: "AC" },
   { name: "Sarah Mitchell", role: "Senior Systems Engineer", bio: "Infrastructure specialist. Kubernetes, Docker, and high-availability Minecraft architectures. Folia core contributor.", avatar: "SM" },
@@ -138,6 +146,10 @@ export default function AboutPage() {
             <a href="https://discord.gg/8NPerTzmKR" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 btn-outline">
               <DiscordIcon className="h-5 w-5" aria-hidden="true" />
               Join Discord
+            </a>
+            <a href="https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 btn-outline hover:text-red-500 hover:border-red-500/50">
+              <YoutubeIcon className="h-5 w-5 text-red-500" aria-hidden="true" />
+              YouTube Channel
             </a>
             <a href="https://twitter.com/notixnode" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 btn-outline">
               <TwitterIcon className="h-5 w-5" aria-hidden="true" />

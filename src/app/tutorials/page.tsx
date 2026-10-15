@@ -213,9 +213,28 @@ export default function TutorialsPage() {
   return (
     <div className="min-h-screen">
       <section className="section container" aria-labelledby="tutorials-heading">
-        <div className="mb-8">
-          <h1 id="tutorials-heading" className="text-3xl sm:text-4xl font-bold text-foreground">Tutorials & Guides</h1>
-          <p className="mt-2 text-muted-foreground">Learn from step-by-step guides by experienced server developers</p>
+        <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 id="tutorials-heading" className="text-3xl sm:text-4xl font-bold text-foreground">Tutorials & Guides</h1>
+            <p className="mt-2 text-muted-foreground">Learn from step-by-step guides by experienced server developers</p>
+          </div>
+          <a
+            href="https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-card border border-border hover:border-red-500/40 hover:bg-red-500/5 transition-all text-sm font-medium w-fit group"
+          >
+            <div className="h-8 w-8 rounded-lg bg-red-600/10 text-red-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg className="h-5 w-5 fill-currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+            <div>
+              <div className="text-foreground font-semibold group-hover:text-red-500 transition-colors">Watch Video Tutorials</div>
+              <div className="text-xs text-muted-foreground">Subscribe on YouTube @os_notixnode</div>
+            </div>
+            <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-red-500 ml-1 transition-colors" />
+          </a>
         </div>
 
         <form onSubmit={handleSearch} className="card-base p-6 mb-8">

@@ -64,16 +64,16 @@ const footerLinks = {
   community: [
     { name: "Discord", href: "https://discord.gg/8NPerTzmKR", external: true },
     { name: "GitHub", href: "https://github.com/adityakashyap7047/notixnode", external: true },
+    { name: "YouTube", href: "https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w", external: true },
     { name: "Twitter", href: "https://twitter.com/notixnode", external: true },
-    { name: "YouTube", href: "https://youtube.com/@notixnode", external: true },
   ],
 };
 
 const socialLinks = [
   { name: "Discord", icon: DiscordIcon, href: "https://discord.gg/8NPerTzmKR" },
   { name: "GitHub", icon: GithubIcon, href: "https://github.com/adityakashyap7047/notixnode" },
+  { name: "YouTube", icon: YoutubeIcon, href: "https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w" },
   { name: "Twitter", icon: TwitterIcon, href: "https://twitter.com/notixnode" },
-  { name: "YouTube", icon: YoutubeIcon, href: "https://youtube.com/@notixnode" },
 ];
 
 export function Footer() {
