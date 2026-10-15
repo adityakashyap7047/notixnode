@@ -42,3 +42,9 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# large media files (exceeds GitHub 100MB limit)
+*.mp4
+*.webm
+/public/videos/
+/public/*.mp4

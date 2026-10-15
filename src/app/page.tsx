@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "@/components/ui/Badge";
 import { Separator } from "@/components/ui/Separator";
 import { ArrowRight, Download, ExternalLink, Star, Shield, Zap, Code, ImageIcon, Map, Wrench, BookOpen, Gem, CheckCircle, ChevronRight } from "lucide-react";
+import { HeroVideoBackground } from "@/components/ui/HeroVideoBackground";
 
 const categories = [
   { name: "Plugin Configurations", href: "/resources/configs", icon: Code, count: 47, description: "Ready-to-use configs for Essentials, LuckPerms, WorldGuard, and more" },
@@ -122,9 +123,12 @@ const platformCapabilities = [
 
 export default function Home() {
   return (
-    <div className="hero-gradient min-h-screen">
+    <div className="hero-gradient min-h-screen relative overflow-hidden">
+      {/* Cinematic Background Video */}
+      <HeroVideoBackground src="/videos/31718-388172974.mp4" />
+
       {/* Hero Section */}
-      <section className="pt-32 sm:pt-40 pb-16 container relative" aria-labelledby="hero-heading">
+      <section className="pt-32 sm:pt-40 pb-16 container relative z-10" aria-labelledby="hero-heading">
         {/* Ambient Top Glow */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#FF1E27]/20 blur-[140px] pointer-events-none rounded-full" />
 
