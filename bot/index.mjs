@@ -52,8 +52,7 @@ const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://notixnode.vercel.app";
 const DISCORD_INVITE = "https://discord.gg/8NPerTzmKR";
 const YOUTUBE_URL = "https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w";
-const GITHUB_URL = "https://github.com/adityakashyap7047/notixnode";
-const BRAND_COLOR = 0xFF1E27; // Pure Crimson Red
+const BRAND_COLOR = 0xC5A059; // Champagne Gold
 
 if (!TOKEN) {
   console.error("❌ ERROR: DISCORD_BOT_TOKEN is not defined in environment or .env.local");
@@ -491,11 +490,10 @@ async function executeFullServerSetup(guild, executor, clearOld = true, progress
       .setColor(BRAND_COLOR)
       .setTitle("🔗 Official NOTIXNODE Links & Touchpoints")
       .setDescription(
-        "Access all official platforms, repositories, and documentation:\n\n" +
+        "Access all official platforms, tutorials, and documentation:\n\n" +
         `• 🌐 **Platform Website:** [notixnode.vercel.app](${WEBSITE_URL})\n` +
         `• 📺 **YouTube Channel:** [youtube.com/@os_notixnode](${YOUTUBE_URL})\n` +
-        `• 🐙 **GitHub Repository:** [github.com/adityakashyap7047/notixnode](${GITHUB_URL})\n` +
-        `• 💬 **Discord Invite:** [discord.gg/8NPerTzmKR](${DISCORD_INVITE})\n` +
+        `• 💬 **Discord Community:** [discord.gg/8NPerTzmKR](${DISCORD_INVITE})\n` +
         `• ⚡ **Live Status:** [notixnode.vercel.app/status](${WEBSITE_URL}/status)`
       )
       .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Official Touchpoints", iconURL: client.user.displayAvatarURL() });
@@ -503,7 +501,7 @@ async function executeFullServerSetup(guild, executor, clearOld = true, progress
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setLabel("Open Website").setStyle(ButtonStyle.Link).setURL(WEBSITE_URL),
       new ButtonBuilder().setLabel("YouTube Tutorials").setStyle(ButtonStyle.Link).setURL(YOUTUBE_URL),
-      new ButtonBuilder().setLabel("GitHub").setStyle(ButtonStyle.Link).setURL(GITHUB_URL)
+      new ButtonBuilder().setLabel("Join Discord").setStyle(ButtonStyle.Link).setURL(DISCORD_INVITE)
     );
 
     await createdChannels["🔗︱official-links"].send({ embeds: [linksEmbed], components: [row] }).catch(() => {});
@@ -517,15 +515,15 @@ async function executeFullServerSetup(guild, executor, clearOld = true, progress
       .setDescription(
         "Need technical assistance with a configuration, guide, or tool?\n\n" +
         "• **Community Help:** Ask questions directly in **#community-help**.\n" +
-        "• **Bug Reports & Issues:** File issues on our **[GitHub Issues](https://github.com/adityakashyap7047/notixnode/issues)**.\n" +
+        "• **Bug Reports & Inquiries:** Post directly in **#bug-reports**.\n" +
         "• **Staff Inquiries:** Use the touchpoints below to connect with team members."
       )
       .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Support System", iconURL: client.user.displayAvatarURL() });
 
     const ticketRow = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setLabel("Website Hub").setStyle(ButtonStyle.Link).setURL(WEBSITE_URL),
-      new ButtonBuilder().setLabel("Report Bug on GitHub").setStyle(ButtonStyle.Link).setURL(`${GITHUB_URL}/issues`),
-      new ButtonBuilder().setLabel("YouTube Guides").setStyle(ButtonStyle.Link).setURL(YOUTUBE_URL)
+      new ButtonBuilder().setLabel("YouTube Guides").setStyle(ButtonStyle.Link).setURL(YOUTUBE_URL),
+      new ButtonBuilder().setLabel("Support Discord").setStyle(ButtonStyle.Link).setURL(DISCORD_INVITE)
     );
 
     await createdChannels["🎫︱open-ticket"].send({ embeds: [ticketEmbed], components: [ticketRow] }).catch(() => {});

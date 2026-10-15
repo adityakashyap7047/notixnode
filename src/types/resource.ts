@@ -63,7 +63,7 @@ export interface ResourceFile {
 export interface ResourceAuthor {
   id: string;
   name: string;
-  /** Profile URL (GitHub, Discord, website) */
+  /** Profile URL (Discord, website) */
   url?: string;
   /** Verified publisher badge */
   isVerified: boolean;

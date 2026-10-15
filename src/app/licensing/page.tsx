@@ -285,7 +285,7 @@ export default function LicensingPage() {
             <h2 className="text-2xl font-bold text-foreground mb-6">Third-Party Resources</h2>
             <Card variant="glass" padding="lg">
               <div className="prose prose-invert max-w-none text-muted-foreground">
-                <p>Some NOTIXNODE resources link to external projects (GitHub, SpigotMC, Modrinth, etc.). These resources are governed by their own licenses, which may differ from NOTIXNODE's standard licenses.</p>
+                <p>Some NOTIXNODE resources link to external projects (SpigotMC, BuiltByBit, Modrinth, etc.). These resources are governed by their own licenses, which may differ from NOTIXNODE's standard licenses.</p>
                 <p><strong>Always check the source repository's LICENSE file before use.</strong> NOTIXNODE does not control or modify third-party licenses.</p>
                 <ul>
                   <li>External links are marked with an "External" badge</li>

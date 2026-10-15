@@ -64,7 +64,7 @@ If we wouldn't recommend it to a fellow server admin, we don't link it.`
 - **Resource cards:** External/affiliate resources show an "External" badge
 - **Tool recommendations:** Hosting/tool suggestions in tutorials may be affiliate
 
-Non-affiliate external links (documentation, GitHub, official sites) are not marked.`
+Non-affiliate external links (documentation, official project sites, wikis) are not marked.`
   },
   {
     id: "compliance",

@@ -118,8 +118,8 @@ export default function ToolsPage() {
             </Card>
             <Card variant="glass" padding="md">
               <ExternalLink className="h-6 w-6 text-warning mb-3" aria-hidden="true" />
-              <h3 className="font-semibold text-foreground mb-2">Open Source</h3>
-              <p className="text-sm text-muted-foreground">Tool logic is open source. Contribute or audit on our GitHub repository.</p>
+              <h3 className="font-semibold text-foreground mb-2">Zero Tracking</h3>
+              <p className="text-sm text-muted-foreground">Privacy first. All utilities operate client-side with zero telemetry or data retention.</p>
             </Card>
           </div>
         </section>

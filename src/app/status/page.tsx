@@ -385,9 +385,8 @@ export default function StatusPage() {
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
               <span>Not experiencing an issue listed here?</span>
               <Button variant="ghost" size="sm" asChild>
-                <a href="https://github.com/adityakashyap7047/notixnode/issues/new" target="_blank" rel="noopener noreferrer">
+                <a href="/contact">
                   Report an Issue
-                  <ExternalLink className="h-3.5 w-3.5 ml-1" aria-hidden="true" />
                 </a>
               </Button>
               <Button variant="ghost" size="sm" asChild>

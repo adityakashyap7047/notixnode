@@ -21,7 +21,7 @@ These terms apply to all visitors, users, and customers ("You"). "We," "Our," an
 - **Free Resources:** Plugin configurations, maps, graphics, tutorials, and developer tools accessible without payment.
 - **Premium Resources:** Exclusive content, advanced tutorials with source code, bulk downloads, API access, and priority support.
 - **Developer Tools:** Browser-based utilities (MOTD previewer, prefix builder, properties generator, etc.) running client-side.
-- **Community Features:** Discord access, GitHub discussions, resource requests, and voting.
+- **Community Features:** Discord access, resource requests, community feedback, and voting.
 
 We reserve the right to modify, suspend, or discontinue any service at any time.`
   },
@@ -59,7 +59,7 @@ We reserve the right to modify, suspend, or discontinue any service at any time.
 
 **No Liability:** We are not responsible for server issues, data loss, or misconfigurations resulting from tool usage.
 
-**Open Source:** Tool logic is open source on GitHub. Contributions welcome.`
+**Client Security:** Tool logic executes safely within your browser without external server calls.`
   },
   {
     id: "conduct",

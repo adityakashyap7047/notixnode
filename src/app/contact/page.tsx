@@ -12,7 +12,7 @@ const contactMethods = [
   { icon: Mail, title: "Email", value: "support@notixnode.com", description: "General inquiries, billing, partnerships", action: "mailto:support@notixnode.com" },
   { icon: MessageSquare, title: "Discord", value: "discord.gg/8NPerTzmKR", description: "Community support, feature requests, chat", action: "https://discord.gg/8NPerTzmKR" },
   { icon: Video, title: "YouTube", value: "@os_notixnode", description: "Video tutorials, walkthroughs, devlogs", action: "https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w" },
-  { icon: GitBranch, title: "GitHub", value: "github.com/adityakashyap7047/notixnode", description: "Bug reports, feature requests, contributions", action: "https://github.com/adityakashyap7047/notixnode" },
+  { icon: Clock, title: "Node Monitor", value: "notixnode.com/status", description: "Live server status, latency & node uptime", action: "/status" },
 ];
 
 const faqs = [
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "How do I request a new resource?",
-    a: "Join our Discord and post in #resource-requests, or open a GitHub issue with the 'resource-request' label. We prioritize based on community votes."
+    a: "Join our Discord and post in #resource-requests, or open a support ticket in our server. We prioritize based on community votes."
   },
   {
     q: "What payment methods do you accept?",
