@@ -33,13 +33,13 @@ export function Header() {
       >
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 group" aria-label="NOTIXNODE Home">
-          <div className="h-8 w-8 rounded-full bg-[#FF1E27] flex items-center justify-center shadow-[0_0_18px_rgba(255,30,39,0.6)] group-hover:scale-105 transition-transform">
-            <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#DFBA73] to-[#C5A059] flex items-center justify-center shadow-[0_0_18px_rgba(212,175,55,0.6)] group-hover:scale-105 transition-transform">
+            <svg className="h-4 w-4 text-black font-bold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
           <span className="font-extrabold text-lg tracking-wider text-white">
-            NOTIX<span className="text-[#FF1E27]">NODE</span>
+            NOTIX<span className="text-[#C5A059]">NODE</span>
           </span>
         </Link>
 
@@ -54,7 +54,7 @@ export function Header() {
                 className={cn(
                   "px-3.5 py-1 text-xs font-semibold rounded-full transition-all duration-200",
                   isActive
-                    ? "bg-[#FF1E27] text-white shadow-[0_0_15px_rgba(255,30,39,0.6)]"
+                    ? "bg-gradient-to-r from-[#DFBA73] to-[#C5A059] text-black font-bold shadow-[0_0_15px_rgba(212,175,55,0.5)]"
                     : "text-neutral-300 hover:text-white hover:bg-white/5"
                 )}
               >
@@ -110,7 +110,7 @@ export function Header() {
             href="https://discord.gg/8NPerTzmKR"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-1.5 bg-[#FF1E27] hover:bg-[#E50914] text-white text-xs px-3.5 py-1.5 rounded-full font-semibold shadow-[0_0_20px_rgba(255,30,39,0.45)] transition-all hover:scale-105"
+            className="hidden sm:flex items-center gap-1.5 bg-gradient-to-r from-[#DFBA73] to-[#C5A059] hover:from-[#F3D389] hover:to-[#D4AF37] text-black text-xs px-3.5 py-1.5 rounded-full font-bold shadow-[0_0_20px_rgba(212,175,55,0.45)] transition-all hover:scale-105"
             aria-label="Join Discord Community"
           >
             <svg className="h-3.5 w-3.5 fill-currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -156,7 +156,7 @@ export function Header() {
                   className={cn(
                     "px-3 py-2 text-sm font-semibold rounded-xl transition-colors text-center",
                     isActive
-                      ? "bg-[#FF1E27] text-white shadow-[0_0_12px_rgba(255,30,39,0.5)]"
+                      ? "bg-gradient-to-r from-[#DFBA73] to-[#C5A059] text-black font-bold shadow-[0_0_12px_rgba(212,175,55,0.5)]"
                       : "text-neutral-300 hover:text-white hover:bg-white/5"
                   )}
                   onClick={() => setMobileMenuOpen(false)}
@@ -174,7 +174,7 @@ export function Header() {
               href="https://discord.gg/8NPerTzmKR"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 bg-[#FF1E27] text-white py-2.5 rounded-full font-semibold text-sm shadow-[0_0_20px_rgba(255,30,39,0.4)]"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#DFBA73] to-[#C5A059] text-black py-2.5 rounded-full font-bold text-sm shadow-[0_0_20px_rgba(212,175,55,0.4)]"
               onClick={() => setMobileMenuOpen(false)}
             >
               <svg className="h-4 w-4 fill-currentColor" viewBox="0 0 24 24" aria-hidden="true">

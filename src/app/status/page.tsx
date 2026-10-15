@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Separator } from "@/components/ui/Separator";
+import { FloatingNodeMonitor } from "@/components/status/FloatingNodeMonitor";
 
 const services = [
   {
@@ -225,6 +226,11 @@ export default function StatusPage() {
               <RefreshCw className="h-4 w-4 mr-2" aria-hidden="true" />
               Refresh
             </Button>
+          </div>
+
+          {/* Live Infrastructure Node Monitor */}
+          <div className="mb-12">
+            <FloatingNodeMonitor />
           </div>
 
           {/* Services Grid */}

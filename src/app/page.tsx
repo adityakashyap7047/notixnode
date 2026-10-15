@@ -130,21 +130,21 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-32 sm:pt-40 pb-16 container relative z-10" aria-labelledby="hero-heading">
         {/* Ambient Top Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#FF1E27]/20 blur-[140px] pointer-events-none rounded-full" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#C5A059]/20 blur-[140px] pointer-events-none rounded-full" />
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Top Pill Badge (Reference Style) */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-semibold text-neutral-200 mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-            <span className="h-2 w-2 rounded-full bg-[#FF1E27] shadow-[0_0_8px_#FF1E27] animate-pulse" />
+            <span className="h-2 w-2 rounded-full bg-[#C5A059] shadow-[0_0_8px_#C5A059] animate-pulse" />
             <span>Developer Infrastructure</span>
             <span className="text-neutral-500">•</span>
-            <span className="text-[#FF444E]">Version 2.0</span>
+            <span className="text-[#DFBA73]">Version 2.0</span>
           </div>
 
           <h1 id="hero-heading" className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight text-white animate-slide-up">
             Your Minecraft <br />
             <span>Server Stack </span>
-            <span className="gradient-text-red">On Demand</span>
+            <span className="gradient-text-gold">On Demand</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-xl text-neutral-400 max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: "100ms" }}>
@@ -153,7 +153,7 @@ export default function Home() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: "200ms" }}>
-            <Button size="lg" className="rounded-full px-8 py-3.5 text-base shadow-[0_0_25px_rgba(255,30,39,0.55)]" asChild>
+            <Button size="lg" className="rounded-full px-8 py-3.5 text-base shadow-[0_0_25px_rgba(212,175,55,0.55)] font-bold" asChild>
               <Link href="/resources">
                 Explore Resources
                 <ArrowRight className="h-4 w-4 ml-2" aria-hidden="true" />
@@ -163,9 +163,9 @@ export default function Home() {
               href="https://discord.gg/8NPerTzmKR"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline px-6 py-3 text-base flex items-center gap-2.5 rounded-full hover:border-[#FF1E27] hover:bg-[#FF1E27]/10"
+              className="btn-outline px-6 py-3 text-base flex items-center gap-2.5 rounded-full hover:border-[#C5A059] hover:bg-[#C5A059]/10"
             >
-              <svg className="h-4 w-4 fill-currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg className="h-4 w-4 fill-currentColor text-[#DFBA73]" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.675 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.08.08 0 0 0 .031.057 19.9 19.9 0 0 0 5.992 4.785.077.077 0 0 0 .084-.028c.293-.198.551-.537.77-.997a18.385 18.385 0 0 0 1.948-1.813.077.077 0 0 0-.007-.127 12.05 12.05 0 0 1-1.523-4.213.074.074 0 0 1 .148-.042 7.416 7.416 0 0 0 2.742 0 .077.077 0 0 1 .147.043c.7.832 1.456 1.747 2.04 2.543a.077.077 0 0 0 .127.006 18.39 18.39 0 0 0 2.718-3.36.077.077 0 0 0-.007-.128 12.15 12.15 0 0 0 .747-1.018.074.074 0 0 0-.025-.093 19.88 19.88 0 0 0 5.025-4.518.074.074 0 0 0-.029-.083zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
               </svg>
               <span>Join Discord</span>
@@ -174,20 +174,20 @@ export default function Home() {
 
           {/* Floating Metric Glass Cards (Reference 3M+, 95%, 88%, 120+) */}
           <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
-            <div className="glass p-5 rounded-2xl border border-white/10 hover:border-[#FF1E27]/40 transition-colors">
+            <div className="glass p-5 rounded-2xl border border-white/10 hover:border-[#C5A059]/50 transition-colors">
               <div className="text-2xl sm:text-3xl font-extrabold text-white">3M+</div>
               <p className="text-xs text-neutral-400 mt-1">Players Supported</p>
             </div>
-            <div className="glass p-5 rounded-2xl border border-white/10 hover:border-[#FF1E27]/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#FF1E27]">99.9%</div>
+            <div className="glass p-5 rounded-2xl border border-white/10 hover:border-[#C5A059]/50 transition-colors">
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#DFBA73]">99.9%</div>
               <p className="text-xs text-neutral-400 mt-1">Crash Resistance</p>
             </div>
-            <div className="glass p-5 rounded-2xl border border-white/10 hover:border-[#FF1E27]/40 transition-colors">
+            <div className="glass p-5 rounded-2xl border border-white/10 hover:border-[#C5A059]/50 transition-colors">
               <div className="text-2xl sm:text-3xl font-extrabold text-white">100%</div>
               <p className="text-xs text-neutral-400 mt-1">Open Verified</p>
             </div>
-            <div className="glass p-5 rounded-2xl border border-white/10 hover:border-[#FF1E27]/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#FF444E]">120+</div>
+            <div className="glass p-5 rounded-2xl border border-white/10 hover:border-[#C5A059]/50 transition-colors">
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#C5A059]">120+</div>
               <p className="text-xs text-neutral-400 mt-1">Production Assets</p>
             </div>
           </div>
@@ -196,9 +196,9 @@ export default function Home() {
         {/* Reference Highlight Manifesto Statement */}
         <div className="pt-24 pb-8 max-w-4xl mx-auto text-center">
           <p className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-snug text-white">
-            We <span className="text-[#FF1E27]">engineer</span> and publish{" "}
-            <span className="text-[#FF1E27]">server resources</span> with performance at the core,
-            ensuring every <span className="text-[#FF1E27]">network thrives</span>.
+            We <span className="text-[#DFBA73]">engineer</span> and publish{" "}
+            <span className="text-[#C5A059]">server resources</span> with performance at the core,
+            ensuring every <span className="text-[#DFBA73]">network thrives</span>.
           </p>
         </div>
       </section>

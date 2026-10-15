@@ -72,24 +72,24 @@ export function HeroVideoBackground({
         <source src="/31718-388172974.mp4" type="video/mp4" />
       </video>
 
-      {/* Cinematic Overlays: Pure Black, Crimson Tint & Radial Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/80 to-[#000000]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_10%,_#000000_85%)]" />
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#FF1E27]/15 via-transparent to-[#FF1E27]/5 mix-blend-screen" />
+      {/* Cinematic Overlays: Pure Black, Warm Champagne Gold Tint & Radial Vignette */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/80 to-[#08080A]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_10%,_#08080A_85%)]" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#C5A059]/20 via-transparent to-[#DFBA73]/10 mix-blend-screen" />
       
       {/* Subtle Digital Grid Overlay */}
       <div 
         className="absolute inset-0 opacity-[0.06] pointer-events-none" 
         style={{ 
-          backgroundImage: "linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.12) 1px, transparent 1px)", 
+          backgroundImage: "linear-gradient(to right, rgba(212,175,55,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(212,175,55,0.15) 1px, transparent 1px)", 
           backgroundSize: "44px 44px" 
         }} 
       />
 
-      {/* Floating Micro Video Controls (Pure Glass & Crimson Indicator) */}
+      {/* Floating Micro Video Controls (Pure Glass & Champagne Gold Indicator) */}
       <div className="absolute bottom-6 right-6 pointer-events-auto z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 border border-white/10 backdrop-blur-md text-xs text-neutral-300 shadow-[0_0_20px_rgba(0,0,0,0.8)]">
         <span className="flex items-center gap-1.5 font-mono text-[10px] text-neutral-400 uppercase tracking-wider pr-1">
-          <span className={`h-1.5 w-1.5 rounded-full ${isPlaying ? "bg-[#FF1E27] shadow-[0_0_8px_#FF1E27] animate-pulse" : "bg-neutral-600"}`} />
+          <span className={`h-1.5 w-1.5 rounded-full ${isPlaying ? "bg-[#DFBA73] shadow-[0_0_8px_#DFBA73] animate-pulse" : "bg-neutral-600"}`} />
           Cinematic
         </span>
         <button
@@ -99,7 +99,7 @@ export function HeroVideoBackground({
           title={isPlaying ? "Pause background video" : "Play background video"}
           aria-label={isPlaying ? "Pause background video" : "Play background video"}
         >
-          {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 text-[#FF1E27]" />}
+          {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 text-[#DFBA73]" />}
         </button>
         <button
           type="button"
@@ -108,7 +108,7 @@ export function HeroVideoBackground({
           title={isMuted ? "Unmute audio" : "Mute audio"}
           aria-label={isMuted ? "Unmute audio" : "Mute audio"}
         >
-          {isMuted ? <VolumeX className="h-3.5 w-3.5 text-neutral-500" /> : <Volume2 className="h-3.5 w-3.5 text-[#FF1E27]" />}
+          {isMuted ? <VolumeX className="h-3.5 w-3.5 text-neutral-500" /> : <Volume2 className="h-3.5 w-3.5 text-[#DFBA73]" />}
         </button>
       </div>
     </div>

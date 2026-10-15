@@ -650,6 +650,8 @@ client.on("interactionCreate", async (interaction) => {
       let apiStatus = "Offline";
       let apiLatency = 0;
       let resourceCount = 12;
+      let mcOnline = false;
+      let mcPing = 0;
 
       try {
         const res = await fetch(`${WEBSITE_URL}/api/resources?pageSize=1`, {
@@ -668,9 +670,22 @@ client.on("interactionCreate", async (interaction) => {
         apiStatus = "Operational 🟢";
       }
 
+      // Query FloatingNode Server
+      try {
+        const mcStart = Date.now();
+        const mcRes = await fetch("https://api.mcsrvstat.us/3/free-ca.floatingnode.bond:25565", {
+          signal: AbortSignal.timeout(3000)
+        });
+        mcPing = Date.now() - mcStart;
+        if (mcRes.ok) {
+          const mcData = await mcRes.json();
+          mcOnline = Boolean(mcData.online);
+        }
+      } catch {}
+
       const embed = new EmbedBuilder()
         .setColor(BRAND_COLOR)
-        .setTitle("⚡ 𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 System Status")
+        .setTitle("⚡ 𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 System & Node Status")
         .setDescription("Real-time telemetry and infrastructure health metrics:")
         .addFields(
           { name: "🌐 Website URL", value: `[notixnode.vercel.app](${WEBSITE_URL})`, inline: true },
@@ -678,7 +693,12 @@ client.on("interactionCreate", async (interaction) => {
           { name: "⏱️ Latency", value: `${apiLatency}ms`, inline: true },
           { name: "🤖 Bot WebSocket", value: `${client.ws.ping}ms`, inline: true },
           { name: "📦 Indexed Resources", value: `${resourceCount} Resources`, inline: true },
-          { name: "🔒 Security Tier", value: "Verified & Hardened", inline: true }
+          { name: "🔒 Security Tier", value: "Verified & Hardened", inline: true },
+          { 
+            name: "🖳 FloatingNode Server (Node CA)", 
+            value: `• **Hostname:** \`free-ca.floatingnode.bond:25565\`\n• **Status:** ${mcOnline ? "Online 🟢" : "Standby / Offline 🔴"} (${mcPing}ms)\n• **Specs:** 500% CPU (5 vCores) | 12.7 GiB RAM | 39 GB NVMe\n• **SFTP:** \`sftp://free-ca.floatingnode.bond:2022\` (#5b9d2890)`, 
+            inline: false 
+          }
         )
         .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Telemetry System", iconURL: client.user.displayAvatarURL() })
         .setTimestamp();
@@ -816,7 +836,7 @@ client.on("messageCreate", async (message) => {
   }
 
   if (content === "!status") {
-    return message.reply(`⚡ **𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Status:** Live at ${WEBSITE_URL} | Ping: ${client.ws.ping}ms`).catch(() => {});
+    return message.reply(`⚡ **𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 System Status:**\n• Platform: ${WEBSITE_URL} | Ping: ${client.ws.ping}ms\n• Node Server: \`free-ca.floatingnode.bond:25565\` (Node CA, 500% CPU, 12.7GB RAM)\n• Live Dashboard: ${WEBSITE_URL}/status`).catch(() => {});
   }
 });
 

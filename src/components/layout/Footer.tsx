@@ -83,12 +83,12 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="NOTIXNODE Home">
-              <div className="h-8 w-8 rounded-full bg-[#FF1E27] flex items-center justify-center shadow-[0_0_15px_rgba(255,30,39,0.5)]">
-                <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#DFBA73] to-[#C5A059] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+                <svg className="h-4 w-4 text-black font-bold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <span className="font-extrabold text-xl tracking-wider text-white">NOTIX<span className="text-[#FF1E27]">NODE</span></span>
+              <span className="font-extrabold text-xl tracking-wider text-white">NOTIX<span className="text-[#C5A059]">NODE</span></span>
             </Link>
             <p className="text-sm text-neutral-400 mb-4 max-w-xs">
               Premium Minecraft server development resources, configurations, graphics, maps, and tools for professional server administrators and developers.
@@ -100,7 +100,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-400 hover:text-[#FF1E27] transition-colors"
+                  className="text-neutral-400 hover:text-[#C5A059] transition-colors"
                   aria-label={social.name}
                 >
                   <social.icon className="h-5 w-5" />
