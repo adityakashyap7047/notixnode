@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -133,6 +134,18 @@ export default function Home() {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#C5A059]/20 blur-[140px] pointer-events-none rounded-full" />
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
+          {/* Official NOTIX NODE Logo */}
+          <div className="flex justify-center mb-6 animate-slide-up">
+            <Image
+              src="/notixnode-logo.png"
+              alt="NOTIXNODE"
+              width={260}
+              height={104}
+              className="h-14 sm:h-18 w-auto object-contain drop-shadow-[0_0_30px_rgba(255,30,39,0.45)] hover:scale-105 transition-transform duration-300"
+              priority
+            />
+          </div>
+
           {/* Top Pill Badge (Reference Style) */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-semibold text-neutral-200 mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
             <span className="h-2 w-2 rounded-full bg-[#C5A059] shadow-[0_0_8px_#C5A059] animate-pulse" />

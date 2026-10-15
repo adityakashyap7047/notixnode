@@ -3,6 +3,7 @@
 import { useState, Fragment } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Menu, X, Search } from "lucide-react";
@@ -28,19 +29,19 @@ export function Header() {
   return (
     <header className="fixed top-3 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none">
       <nav
-        className="pointer-events-auto max-w-7xl mx-auto glass-strong rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between border border-white/10 shadow-[0_12px_35px_rgba(0,0,0,0.85)]"
+        className="pointer-events-auto max-w-7xl mx-auto glass-strong rounded-full px-4 sm:px-6 py-2 flex items-center justify-between border border-white/10 shadow-[0_12px_35px_rgba(0,0,0,0.85)]"
         aria-label="Main navigation"
       >
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group" aria-label="NOTIXNODE Home">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#DFBA73] to-[#C5A059] flex items-center justify-center shadow-[0_0_18px_rgba(212,175,55,0.6)] group-hover:scale-105 transition-transform">
-            <svg className="h-4 w-4 text-black font-bold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </div>
-          <span className="font-extrabold text-lg tracking-wider text-white">
-            NOTIX<span className="text-[#C5A059]">NODE</span>
-          </span>
+        <Link href="/" className="flex items-center gap-2 group py-0.5" aria-label="NOTIXNODE Home">
+          <Image
+            src="/notixnode-logo.png"
+            alt="NOTIXNODE"
+            width={130}
+            height={52}
+            className="h-8 sm:h-9 w-auto object-contain drop-shadow-[0_0_14px_rgba(255,30,39,0.4)] group-hover:scale-105 transition-transform duration-200"
+            priority
+          />
         </Link>
 
         {/* Center Pill Navigation Container */}

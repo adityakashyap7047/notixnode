@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { ExternalLink } from "lucide-react";
 
@@ -71,13 +72,14 @@ export function Footer() {
       <div className="container py-12 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           <div className="col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="NOTIXNODE Home">
-              <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#DFBA73] to-[#C5A059] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.5)]">
-                <svg className="h-4 w-4 text-black font-bold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <span className="font-extrabold text-xl tracking-wider text-white">NOTIX<span className="text-[#C5A059]">NODE</span></span>
+            <Link href="/" className="inline-block mb-4 group" aria-label="NOTIXNODE Home">
+              <Image
+                src="/notixnode-logo.png"
+                alt="NOTIXNODE"
+                width={150}
+                height={60}
+                className="h-10 w-auto object-contain drop-shadow-[0_0_16px_rgba(255,30,39,0.35)] group-hover:scale-105 transition-transform duration-200"
+              />
             </Link>
             <p className="text-sm text-neutral-400 mb-4 max-w-xs">
               Premium Minecraft server development resources, configurations, graphics, maps, and tools for professional server administrators and developers.

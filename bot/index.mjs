@@ -53,6 +53,7 @@ const WEBSITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://notixnode.vercel
 const DISCORD_INVITE = "https://discord.gg/8NPerTzmKR";
 const YOUTUBE_URL = "https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w";
 const BRAND_COLOR = 0xC5A059; // Champagne Gold
+const LOGO_URL = `${WEBSITE_URL}/notixnode-logo.png`;
 
 if (!TOKEN) {
   console.error("❌ ERROR: DISCORD_BOT_TOKEN is not defined in environment or .env.local");
@@ -572,7 +573,7 @@ async function executeFullServerSetup(guild, executor, clearOld = true, progress
         { name: "📺 YouTube", value: `[youtube.com/@os_notixnode](${YOUTUBE_URL})`, inline: true },
         { name: "⚡ Status", value: `[System Status](${WEBSITE_URL}/status)`, inline: true }
       )
-      .setImage("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80")
+      .setImage(LOGO_URL)
       .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 • Enterprise Minecraft Resources", iconURL: client.user.displayAvatarURL() })
       .setTimestamp();
 
@@ -677,6 +678,7 @@ async function executeFullServerSetup(guild, executor, clearOld = true, progress
         "• 🎫 **Tickets:** *\"I want to open a ticket\"*\n\n" +
         "*Simply type your message below to start chatting!*"
       )
+      .setThumbnail(LOGO_URL)
       .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 24/7 Smart Assistant", iconURL: client.user.displayAvatarURL() });
 
     await createdChannels["🤖︱notix-assistant"].send({ embeds: [assistantEmbed] }).catch(() => {});
@@ -943,6 +945,7 @@ client.on("interactionCreate", async (interaction) => {
             `🛡️ **Human Support:** A staff member (<@&${adminRole?.id || guild.ownerId}>) has been alerted and will assist you shortly.\n\n` +
             `*When your inquiry is resolved, click the **Close Ticket** button below.*`
           )
+          .setThumbnail(LOGO_URL)
           .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Support System", iconURL: client.user.displayAvatarURL() })
           .setTimestamp();
 
@@ -1330,6 +1333,7 @@ client.on("messageCreate", async (message) => {
         .setColor(BRAND_COLOR)
         .setTitle(response.title)
         .setDescription(response.description)
+        .setThumbnail(LOGO_URL)
         .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Smart Assistant • Type anytime for help", iconURL: client.user.displayAvatarURL() })
         .setTimestamp();
 
