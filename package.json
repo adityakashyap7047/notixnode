@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test tests/data-layer.test.mjs tests/security-integration.test.mjs",
-    "bot": "node bot/index.mjs"
+    "bot": "node bot/index.mjs",
+    "deploy:cloudflare": "wrangler pages deploy"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
