@@ -9,7 +9,10 @@ import {
   SlashCommandBuilder, 
   REST, 
   Routes, 
-  ActivityType 
+  ActivityType,
+  ChannelType,
+  PermissionFlagsBits,
+  PermissionsBitField
 } from "discord.js";
 import http from "http";
 import fs from "fs";
@@ -19,11 +22,11 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Crash-proof handlers
+// Crash-proof global process listeners
 process.on("unhandledRejection", (err) => console.error("⚠️ Unhandled Promise Rejection:", err?.message || err));
 process.on("uncaughtException", (err) => console.error("⚠️ Uncaught Exception:", err?.message || err));
 
-// Load environment variables
+// Load environment variables from .env.local
 function loadEnv() {
   const envPath = path.resolve(__dirname, "../.env.local");
   if (fs.existsSync(envPath)) {
@@ -48,6 +51,8 @@ loadEnv();
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://notixnode.vercel.app";
 const DISCORD_INVITE = "https://discord.gg/8NPerTzmKR";
+const YOUTUBE_URL = "https://youtube.com/@os_notixnode?si=3q3E6MlMjz-j0J2w";
+const GITHUB_URL = "https://github.com/adityakashyap7047/notixnode";
 const BRAND_COLOR = 0xFF1E27; // Pure Crimson Red
 
 if (!TOKEN) {
@@ -55,7 +60,7 @@ if (!TOKEN) {
   process.exit(1);
 }
 
-// Lightweight HTTP server for FREE Web Service hosting (Render / Railway / Koyeb)
+// Lightweight HTTP server for FREE Web Service hosting on Render / Railway / Koyeb
 const PORT = process.env.PORT || 3001;
 const server = http.createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "application/json" });
@@ -103,8 +108,8 @@ async function fetchResources(search = "", category = "") {
       const data = await res.json();
       return { resources: data.resources || [], source: "Live Website API" };
     }
-  } catch (err) {
-    // Fall back to local
+  } catch {
+    // Failover to local cache
   }
 
   const local = getLocalResources();
@@ -135,6 +140,26 @@ client.on("error", (err) => console.error("⚠️ Discord client error:", err.me
 
 // Commands definition
 const commands = [
+  new SlashCommandBuilder()
+    .setName("setup-server")
+    .setDescription("⚡ Auto-setup complete NOTIXNODE server: deletes old template & creates new roles/channels")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .addBooleanOption(opt =>
+      opt.setName("clear-old")
+        .setDescription("Delete existing channels to create clean template (Default: true)")
+        .setRequired(false)
+    ),
+
+  new SlashCommandBuilder()
+    .setName("setup")
+    .setDescription("⚡ Auto-setup complete NOTIXNODE server (alias for /setup-server)")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .addBooleanOption(opt =>
+      opt.setName("clear-old")
+        .setDescription("Delete existing channels to create clean template (Default: true)")
+        .setRequired(false)
+    ),
+
   new SlashCommandBuilder()
     .setName("resources")
     .setDescription("Browse and search Minecraft server resources from NOTIXNODE")
@@ -197,7 +222,6 @@ async function registerSlashCommands(clientId) {
 client.once("ready", async () => {
   console.log(`🤖 Logged in as ${client.user.tag} (ID: ${client.user.id})`);
   
-  // Set Discord presence (matching reference activity)
   try {
     client.user.setPresence({
       activities: [{
@@ -213,13 +237,364 @@ client.once("ready", async () => {
   await registerSlashCommands(client.user.id);
 });
 
-// Robust Interaction Handler
+// Full Server Setup Logic (Delete old template & create professional NOTIXNODE template)
+async function executeFullServerSetup(guild, executor, clearOld = true, progressCallback = null) {
+  const log = async (msg) => {
+    console.log(`[Setup] ${msg}`);
+    if (progressCallback) await progressCallback(msg).catch(() => {});
+  };
+
+  await log("🚀 Initiating NOTIXNODE Discord Server Template Setup...");
+
+  // 1. Delete Old Channels & Outdated Custom Roles if requested
+  if (clearOld) {
+    await log("🗑️ Clearing old server channels and categories...");
+    const existingChannels = Array.from(guild.channels.cache.values());
+    const nonCategories = existingChannels.filter(c => c.type !== ChannelType.GuildCategory);
+    const categories = existingChannels.filter(c => c.type === ChannelType.GuildCategory);
+
+    // Delete text and voice channels first to avoid orphan state
+    for (const channel of nonCategories) {
+      try {
+        await channel.delete("NOTIXNODE Server Template Reset");
+        await new Promise(r => setTimeout(r, 150));
+      } catch (err) {
+        console.warn(`Could not delete channel ${channel.name}:`, err.message);
+      }
+    }
+
+    // Delete empty categories next
+    for (const cat of categories) {
+      try {
+        await cat.delete("NOTIXNODE Server Template Reset");
+        await new Promise(r => setTimeout(r, 150));
+      } catch (err) {
+        console.warn(`Could not delete category ${cat.name}:`, err.message);
+      }
+    }
+
+    // Clean up old custom roles below bot's highest role
+    await log("🧹 Cleaning up old outdated server roles...");
+    try {
+      const me = await guild.members.fetchMe().catch(() => null);
+      const botHighestPos = me?.roles?.highest?.position ?? 0;
+      const protectedNames = [
+        "👑 Owner", "🛡️ Administrator", "⚔️ Moderator", 
+        "💎 Premium Dev", "🛠️ Server Developer", "🌟 VIP Member", 
+        "🎮 Member", "🤖 Bots", "Server Booster"
+      ];
+
+      const roles = Array.from(guild.roles.cache.values());
+      for (const role of roles) {
+        if (
+          role.id !== guild.id &&
+          !role.managed &&
+          role.position < botHighestPos &&
+          !protectedNames.some(p => p.toLowerCase() === role.name.toLowerCase())
+        ) {
+          try {
+            await role.delete("NOTIXNODE Server Template Reset");
+            await new Promise(r => setTimeout(r, 100));
+          } catch {}
+        }
+      }
+    } catch (err) {
+      console.warn("Role cleanup error:", err.message);
+    }
+  }
+
+  // 2. Roles to Create (Pure Red, Pure Black, Pure White aesthetic)
+  await log("🎭 Creating branded server role hierarchy...");
+  const ROLES_SPEC = [
+    { name: "👑 Owner", color: 0xFF1E27, hoist: true, mentionable: false, permissions: [PermissionFlagsBits.Administrator] },
+    { name: "🛡️ Administrator", color: 0xE50914, hoist: true, mentionable: false, permissions: [PermissionFlagsBits.Administrator] },
+    { name: "⚔️ Moderator", color: 0xB91C1C, hoist: true, mentionable: false, permissions: [PermissionFlagsBits.ManageMessages, PermissionFlagsBits.KickMembers, PermissionFlagsBits.BanMembers, PermissionFlagsBits.MuteMembers, PermissionFlagsBits.DeafenMembers] },
+    { name: "💎 Premium Dev", color: 0xFF444E, hoist: true, mentionable: true },
+    { name: "🛠️ Server Developer", color: 0xFFFFFF, hoist: true, mentionable: true },
+    { name: "🌟 VIP Member", color: 0xF59E0B, hoist: true, mentionable: true },
+    { name: "🎮 Member", color: 0xA1A1AA, hoist: false, mentionable: true },
+    { name: "🤖 Bots", color: 0x52525B, hoist: true, mentionable: false }
+  ];
+
+  const createdRoles = {};
+  for (const roleDef of ROLES_SPEC) {
+    try {
+      let role = guild.roles.cache.find(r => r.name.toLowerCase() === roleDef.name.toLowerCase());
+      if (!role) {
+        role = await guild.roles.create({
+          name: roleDef.name,
+          color: roleDef.color,
+          hoist: roleDef.hoist,
+          mentionable: roleDef.mentionable,
+          permissions: roleDef.permissions || [],
+          reason: "NOTIXNODE Server Setup"
+        });
+      } else {
+        await role.edit({
+          color: roleDef.color,
+          hoist: roleDef.hoist,
+          mentionable: roleDef.mentionable
+        }).catch(() => {});
+      }
+      createdRoles[roleDef.name] = role;
+    } catch (err) {
+      console.warn(`Could not create/update role ${roleDef.name}:`, err.message);
+    }
+  }
+
+  // Assign Owner role to executor / server owner
+  try {
+    const ownerMember = await guild.members.fetch(executor.id).catch(() => null);
+    if (ownerMember && createdRoles["👑 Owner"]) {
+      await ownerMember.roles.add(createdRoles["👑 Owner"]).catch(() => {});
+    }
+    const me = await guild.members.fetchMe().catch(() => null);
+    if (me && createdRoles["🤖 Bots"]) {
+      await me.roles.add(createdRoles["🤖 Bots"]).catch(() => {});
+    }
+  } catch (err) {
+    console.warn("Could not assign initial roles:", err.message);
+  }
+
+  // 3. Channels & Categories Structure
+  await log("📁 Building categories and styled text/voice channels...");
+  const STRUCTURE = [
+    {
+      category: "📌 ︱WELCOME & INFO",
+      channels: [
+        { name: "📢︱announcements", type: ChannelType.GuildText, readOnly: true },
+        { name: "📜︱rules", type: ChannelType.GuildText, readOnly: true },
+        { name: "🔗︱official-links", type: ChannelType.GuildText, readOnly: true },
+        { name: "🎁︱giveaways", type: ChannelType.GuildText, readOnly: true }
+      ]
+    },
+    {
+      category: "💬 ︱COMMUNITY",
+      channels: [
+        { name: "💬︱general-chat", type: ChannelType.GuildText },
+        { name: "🤖︱bot-commands", type: ChannelType.GuildText },
+        { name: "📸︱media-and-setups", type: ChannelType.GuildText },
+        { name: "💡︱suggestions", type: ChannelType.GuildText }
+      ]
+    },
+    {
+      category: "🛠️ ︱MINECRAFT RESOURCES",
+      channels: [
+        { name: "📦︱configs-and-plugins", type: ChannelType.GuildText },
+        { name: "🎨︱graphics-and-icons", type: ChannelType.GuildText },
+        { name: "🗺️︱maps-and-builds", type: ChannelType.GuildText },
+        { name: "⚡︱paper-and-velocity", type: ChannelType.GuildText },
+        { name: "🛡️︱security-and-anticheat", type: ChannelType.GuildText }
+      ]
+    },
+    {
+      category: "🎫 ︱SUPPORT & TICKETS",
+      channels: [
+        { name: "🎫︱open-ticket", type: ChannelType.GuildText, readOnly: true },
+        { name: "❓︱community-help", type: ChannelType.GuildText },
+        { name: "🐛︱bug-reports", type: ChannelType.GuildText }
+      ]
+    },
+    {
+      category: "🔊 ︱VOICE LOUNGES",
+      channels: [
+        { name: "🔊︱General Lounge", type: ChannelType.GuildVoice },
+        { name: "🎮︱Gaming Room 1", type: ChannelType.GuildVoice },
+        { name: "🛠️︱Dev & Config Session", type: ChannelType.GuildVoice }
+      ]
+    }
+  ];
+
+  const createdChannels = {};
+
+  for (const catDef of STRUCTURE) {
+    try {
+      const category = await guild.channels.create({
+        name: catDef.category,
+        type: ChannelType.GuildCategory,
+        reason: "NOTIXNODE Server Template Setup"
+      });
+
+      for (const chDef of catDef.channels) {
+        const permissionOverwrites = [];
+        if (chDef.readOnly) {
+          permissionOverwrites.push({
+            id: guild.id, // @everyone
+            deny: [
+              PermissionFlagsBits.SendMessages, 
+              PermissionFlagsBits.AddReactions,
+              PermissionFlagsBits.CreatePublicThreads,
+              PermissionFlagsBits.CreatePrivateThreads
+            ],
+            allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.ReadMessageHistory]
+          });
+          if (createdRoles["👑 Owner"]) {
+            permissionOverwrites.push({
+              id: createdRoles["👑 Owner"].id,
+              allow: [PermissionFlagsBits.SendMessages, PermissionFlagsBits.ManageMessages]
+            });
+          }
+          if (createdRoles["🛡️ Administrator"]) {
+            permissionOverwrites.push({
+              id: createdRoles["🛡️ Administrator"].id,
+              allow: [PermissionFlagsBits.SendMessages, PermissionFlagsBits.ManageMessages]
+            });
+          }
+          if (createdRoles["⚔️ Moderator"]) {
+            permissionOverwrites.push({
+              id: createdRoles["⚔️ Moderator"].id,
+              allow: [PermissionFlagsBits.SendMessages, PermissionFlagsBits.ManageMessages]
+            });
+          }
+        }
+
+        const ch = await guild.channels.create({
+          name: chDef.name,
+          type: chDef.type,
+          parent: category.id,
+          permissionOverwrites: permissionOverwrites.length > 0 ? permissionOverwrites : undefined,
+          reason: "NOTIXNODE Channel Generation"
+        });
+
+        createdChannels[chDef.name] = ch;
+        await new Promise(r => setTimeout(r, 200));
+      }
+    } catch (err) {
+      console.warn(`Category error on ${catDef.category}:`, err.message);
+    }
+  }
+
+  // 4. Post Branded Embeds to Relevant Channels
+  await log("✨ Publishing official server guide embeds...");
+
+  // Rules Embed
+  if (createdChannels["📜︱rules"]) {
+    const rulesEmbed = new EmbedBuilder()
+      .setColor(BRAND_COLOR)
+      .setTitle("📜 NOTIXNODE Community Guidelines & Rules")
+      .setDescription(
+        "Welcome to the official **NOTIXNODE** Discord server! Please read and adhere to our community guidelines:\n\n" +
+        "**1. Respect & Professionalism**\nTreat all developers, admins, and members with courtesy. Harassment, discrimination, or hate speech is strictly prohibited.\n\n" +
+        "**2. No Piracy or Leaked Resources**\nWe do not tolerate cracked plugins, leaked assets, or copyright violations. All shared content must follow proper licensing.\n\n" +
+        "**3. Keep Content in Appropriate Channels**\nPost support requests in `#community-help`, bot triggers in `#bot-commands`, and general discussion in `#general-chat`.\n\n" +
+        "**4. No Unauthorized Advertising or DMs**\nDo not mass DM members or promote external services without staff approval.\n\n" +
+        "**5. Follow Discord Terms of Service**\nAdhere to Discord's official Guidelines at all times."
+      )
+      .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 • Rules & Safety", iconURL: client.user.displayAvatarURL() });
+
+    await createdChannels["📜︱rules"].send({ embeds: [rulesEmbed] }).catch(() => {});
+  }
+
+  // Official Links Embed
+  if (createdChannels["🔗︱official-links"]) {
+    const linksEmbed = new EmbedBuilder()
+      .setColor(BRAND_COLOR)
+      .setTitle("🔗 Official NOTIXNODE Links & Touchpoints")
+      .setDescription(
+        "Access all official platforms, repositories, and documentation:\n\n" +
+        `• 🌐 **Platform Website:** [notixnode.vercel.app](${WEBSITE_URL})\n` +
+        `• 📺 **YouTube Channel:** [youtube.com/@os_notixnode](${YOUTUBE_URL})\n` +
+        `• 🐙 **GitHub Repository:** [github.com/adityakashyap7047/notixnode](${GITHUB_URL})\n` +
+        `• 💬 **Discord Invite:** [discord.gg/8NPerTzmKR](${DISCORD_INVITE})\n` +
+        `• ⚡ **Live Status:** [notixnode.vercel.app/status](${WEBSITE_URL}/status)`
+      )
+      .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Official Touchpoints", iconURL: client.user.displayAvatarURL() });
+
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setLabel("Open Website").setStyle(ButtonStyle.Link).setURL(WEBSITE_URL),
+      new ButtonBuilder().setLabel("YouTube Tutorials").setStyle(ButtonStyle.Link).setURL(YOUTUBE_URL),
+      new ButtonBuilder().setLabel("GitHub").setStyle(ButtonStyle.Link).setURL(GITHUB_URL)
+    );
+
+    await createdChannels["🔗︱official-links"].send({ embeds: [linksEmbed], components: [row] }).catch(() => {});
+  }
+
+  // Open Ticket Channel
+  if (createdChannels["🎫︱open-ticket"]) {
+    const ticketEmbed = new EmbedBuilder()
+      .setColor(BRAND_COLOR)
+      .setTitle("🎫 NOTIXNODE Support & Inquiries")
+      .setDescription(
+        "Need technical assistance with a configuration, guide, or tool?\n\n" +
+        "• **Community Help:** Ask questions directly in **#community-help**.\n" +
+        "• **Bug Reports & Issues:** File issues on our **[GitHub Issues](https://github.com/adityakashyap7047/notixnode/issues)**.\n" +
+        "• **Staff Inquiries:** Use the touchpoints below to connect with team members."
+      )
+      .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Support System", iconURL: client.user.displayAvatarURL() });
+
+    const ticketRow = new ActionRowBuilder().addComponents(
+      new ButtonBuilder().setLabel("Website Hub").setStyle(ButtonStyle.Link).setURL(WEBSITE_URL),
+      new ButtonBuilder().setLabel("Report Bug on GitHub").setStyle(ButtonStyle.Link).setURL(`${GITHUB_URL}/issues`),
+      new ButtonBuilder().setLabel("YouTube Guides").setStyle(ButtonStyle.Link).setURL(YOUTUBE_URL)
+    );
+
+    await createdChannels["🎫︱open-ticket"].send({ embeds: [ticketEmbed], components: [ticketRow] }).catch(() => {});
+  }
+
+  // Welcome Announcement
+  if (createdChannels["📢︱announcements"]) {
+    const announceEmbed = new EmbedBuilder()
+      .setColor(BRAND_COLOR)
+      .setTitle("🚀 NOTIXNODE Server Template Successfully Deployed!")
+      .setDescription(
+        `Welcome to the newly structured **NOTIXNODE** server network!\n\n` +
+        `All channels, roles, and categories have been generated and configured.\n` +
+        `Explore verified Minecraft developer resources at **[${WEBSITE_URL}](${WEBSITE_URL})**.`
+      )
+      .setFooter({ text: "𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Infrastructure", iconURL: client.user.displayAvatarURL() });
+
+    await createdChannels["📢︱announcements"].send({ embeds: [announceEmbed] }).catch(() => {});
+  }
+
+  // Greeting in General Chat
+  if (createdChannels["💬︱general-chat"]) {
+    await createdChannels["💬︱general-chat"].send(
+      `🎉 **Welcome to NOTIXNODE!** Server setup completed successfully by <@${executor.id}>. Start chatting or check out **#official-links**!`
+    ).catch(() => {});
+  }
+
+  // DM Confirmation to Executor
+  try {
+    await executor.send(
+      `🎉 **NOTIXNODE Server Template Setup Finished!**\n\n` +
+      `Your Discord server **${guild.name}** has been completely organized:\n` +
+      `• 👑 Roles configured: \`Owner\`, \`Administrator\`, \`Moderator\`, \`Premium Dev\`, \`Server Developer\`, \`VIP Member\`, \`Member\`, \`Bots\`\n` +
+      `• 📁 5 Categories created with 19 dedicated text and voice channels\n` +
+      `• 📜 Formatted guides & official links posted to \`#rules\`, \`#official-links\`, and \`#open-ticket\`\n` +
+      `• 🌐 Platform connected: [${WEBSITE_URL}](${WEBSITE_URL})`
+    ).catch(() => {});
+  } catch {}
+
+  await log("✅ NOTIXNODE server template setup completed successfully!");
+}
+
+// Interaction Handler
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const { commandName } = interaction;
 
   try {
+    // 0. /setup-server or /setup (Deletes old template & builds new one)
+    if (commandName === "setup-server" || commandName === "setup") {
+      // Admin verification
+      if (!interaction.memberPermissions?.has(PermissionFlagsBits.Administrator) && interaction.guild?.ownerId !== interaction.user.id) {
+        return interaction.reply({ content: "❌ You need **Administrator** permissions to run the server setup.", ephemeral: true });
+      }
+
+      const clearOld = interaction.options.getBoolean("clear-old") ?? true;
+      await interaction.reply({ 
+        content: `⚡ **Starting NOTIXNODE Server Setup...**\n${clearOld ? "⚠️ Deleting old template channels/roles and building fresh structure." : "Building new channels alongside existing ones."}\n*This will take ~15-20 seconds.*`,
+        ephemeral: true 
+      });
+
+      await executeFullServerSetup(interaction.guild, interaction.user, clearOld, async (msg) => {
+        console.log(`[Guild ${interaction.guild.id}] ${msg}`);
+      });
+
+      return interaction.followUp({ content: "✅ **Server setup complete!** All categories, channels, roles, and embeds have been successfully established.", ephemeral: true }).catch(() => {});
+    }
+
     // 1. /resources or /latest
     if (commandName === "resources" || commandName === "latest") {
       await interaction.deferReply().catch(() => {});
@@ -290,7 +665,7 @@ client.on("interactionCreate", async (interaction) => {
         }
       } catch {
         apiLatency = Date.now() - start;
-        apiStatus = "Operational 🟢"; // Fallback to live serverless
+        apiStatus = "Operational 🟢";
       }
 
       const embed = new EmbedBuilder()
@@ -370,8 +745,9 @@ client.on("interactionCreate", async (interaction) => {
       const embed = new EmbedBuilder()
         .setColor(BRAND_COLOR)
         .setTitle("🤖 𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊 Discord Bot Commands")
-        .setDescription("Connected directly to the **𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊** platform API.\nUse the slash commands below or message prefixes (`!notix`, `!resources`):")
+        .setDescription("Connected directly to the **𝕹𝖔𝖙𝖎𝖝𝕹𝖔𝖉𝖊** platform API.\nUse the slash commands below or message prefixes (`!setup`, `!notix`):")
         .addFields(
+          { name: "`/setup` or `/setup-server [clear-old: true/false]`", value: "⚡ **Auto-setup full server template:** deletes old channels & creates styled roles, categories, and channels." },
           { name: "`/resources [search] [category]`", value: "Search and view verified configurations, guides, and packs with download links." },
           { name: "`/latest`", value: "View the newest resources published to the marketplace." },
           { name: "`/status`", value: "Check live website and API operational uptime, ping, and indexed resources." },
@@ -396,11 +772,23 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-// Legacy text message prefix support (!notix, !resources, !status, !help)
+// Text message prefix support (!setup, !notix, !resources, !status, !help)
 client.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
+  if (message.author.bot || !message.guild) return;
 
   const content = message.content.trim().toLowerCase();
+
+  // !setup, !setup-server, !setuptemplate, .setup
+  if (content === "!setup" || content === "!setup-server" || content === "!setuptemplate" || content === ".setup" || content === "?setup") {
+    if (!message.member?.permissions.has(PermissionFlagsBits.Administrator) && message.guild.ownerId !== message.author.id) {
+      return message.reply("❌ You must be an **Administrator** to set up the server template.");
+    }
+
+    await message.reply("⚡ **Starting NOTIXNODE Server Setup...**\nDeleting old channels/roles and generating clean template with roles, channels, and embeds. Please wait ~15s...");
+    await executeFullServerSetup(message.guild, message.author, true);
+    return;
+  }
+
   if (content === "!notix" || content === "!help") {
     const embed = new EmbedBuilder()
       .setColor(BRAND_COLOR)
@@ -408,6 +796,7 @@ client.on("messageCreate", async (message) => {
       .setDescription(
         "I am connected to [NOTIXNODE](https://notixnode.vercel.app)!\n\n" +
         "Try using slash commands:\n" +
+        "• `/setup-server` — ⚡ Auto-setup complete server template (Roles & Channels)\n" +
         "• `/resources [query]` — Search configs and packs\n" +
         "• `/status` — Live website & API uptime\n" +
         "• `/tools` — MOTD, Prefix, and checklist tools\n" +
