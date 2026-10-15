@@ -1,0 +1,58 @@
+# ==============================================================================
+# NOTIXNODE — EssentialsX Starter Configuration Template
+# Target: Paper / Purpur / Spigot 1.20 - 1.21.x
+# Description: Production-tuned starting configuration for survival servers.
+# License: MIT
+# Note: Review all values before deploying to a live server.
+# ==============================================================================
+
+# Global settings
+ops-name-color: 'c'
+nickname-prefix: '~'
+max-nick-length: 16
+ignore-colors-in-max-nick-length: true
+hide-join-quit-messages: false
+
+# Teleportation & Warmups
+teleport-cooldown: 5
+teleport-delay: 3
+teleport-invulnerability: 4
+heal-cooldown: 60
+near-radius: 200
+
+# Spawn & Home Settings
+spawn-on-join: false
+respawn-at-home: true
+sethome-multiple:
+  default: 3
+  vip: 5
+  mvp: 10
+  admin: 50
+
+# Economy Settings
+# Requires Vault and a compatible economy engine (e.g. EssentialsX Economy)
+starting-balance: 500.00
+min-money: 0.00
+max-money: 10000000000.00
+currency-symbol: '$'
+price-format: '#,##0.00'
+
+# Chat Formatting (If EssentialsX Chat is installed)
+chat:
+  radius: 0
+  format: '<{DISPLAYNAME}> {MESSAGE}'
+  group-formats:
+    default: '&7{DISPLAYNAME}&8: &f{MESSAGE}'
+    vip: '&a[VIP] &f{DISPLAYNAME}&8: &f{MESSAGE}'
+    admin: '&c[Admin] &f{DISPLAYNAME}&8: &e{MESSAGE}'
+
+# Starting Kits
+kits:
+  starter:
+    delay: 86400
+    items:
+      - iron_sword 1 name:&eStarter_Sword
+      - iron_pickaxe 1
+      - iron_axe 1
+      - bread 32
+      - torch 16

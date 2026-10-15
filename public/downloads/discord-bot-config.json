@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "NOTIXNODE Discord-Minecraft Bridge Configuration Template",
+  "version": "1.0.0",
+  "bot": {
+    "token": "YOUR_DISCORD_BOT_TOKEN_HERE",
+    "guild_id": "000000000000000000",
+    "presence": {
+      "activity_type": "WATCHING",
+      "status_text": "{online_players}/{max_players} online players"
+    }
+  },
+  "channels": {
+    "chat_bridge": "000000000000000000",
+    "server_console_logs": "000000000000000000",
+    "staff_alerts": "000000000000000000",
+    "join_leave_log": "000000000000000000"
+  },
+  "role_synchronization": {
+    "enabled": true,
+    "direction": "SERVER_TO_DISCORD",
+    "mappings": [
+      {
+        "minecraft_luckperms_group": "admin",
+        "discord_role_id": "000000000000000001"
+      },
+      {
+        "minecraft_luckperms_group": "mod",
+        "discord_role_id": "000000000000000002"
+      },
+      {
+        "minecraft_luckperms_group": "vip",
+        "discord_role_id": "000000000000000003"
+      }
+    ]
+  },
+  "embeds": {
+    "server_start": {
+      "color": "#10B981",
+      "title": "Server Online",
+      "description": "The Minecraft network is now open for incoming connections."
+    },
+    "server_stop": {
+      "color": "#EF4444",
+      "title": "Server Offline",
+      "description": "The Minecraft network has been cleanly shut down for scheduled maintenance."
+    }
+  }
+}

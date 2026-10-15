@@ -1,0 +1,42 @@
+{
+  "name": "NOTIXNODE",
+  "short_name": "NOTIXNODE",
+  "description": "Premium Minecraft Server Development Resources",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0F19",
+  "theme_color": "#06B6D4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["developer", "utilities", "games"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Resources",
+      "short_name": "Resources",
+      "description": "Browse all resources",
+      "url": "/resources",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Tools",
+      "short_name": "Tools",
+      "description": "Developer tools",
+      "url": "/tools",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

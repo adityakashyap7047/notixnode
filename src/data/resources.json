@@ -1,0 +1,935 @@
+[
+  {
+    "id": "ex-1",
+    "slug": "essential-plugin-config-starter",
+    "title": "Essential Plugin Configuration Starter",
+    "shortDescription": "A clean, documented config.yml template for EssentialsX with common defaults for survival servers.",
+    "description": "# Essential Plugin Configuration Starter\n\nThis is an **example resource** for development purposes. It provides a well-commented `config.yml` for [EssentialsX](https://essentialsx.net/) tailored for a typical survival server.\n\n## Features\n- Economy, spawn, home, and teleport defaults\n- Chat formatting placeholders\n- Kit and warp configuration examples\n- Permission node references\n\n> **Note**: This is a template only. Review and adjust all settings before using on a production server.\n\n## Installation\n1. Download `config.yml`\n2. Place in `plugins/Essentials/`\n3. Restart server or run `/essentials reload`\n\n## License\nMIT — free to use and modify. Attribution appreciated but not required.\n\n---\n*This is a development example resource. No real download statistics are tracked.*",
+    "category": "plugin-configurations",
+    "resourceType": "configuration",
+    "tags": ["essentialsx", "survival", "config", "template", "economy"],
+    "thumbnail": "/images/resources/essentials-config-thumb.png",
+    "screenshots": ["/images/resources/essentials-config-preview.png"],
+    "minecraftVersions": ["1.20.4", "1.21.1", "latest"],
+    "serverSoftware": ["paper", "spigot", "purpur"],
+    "dependencies": [
+      {
+        "name": "EssentialsX",
+        "version": "2.20.0+",
+        "url": "https://essentialsx.net/",
+        "required": true
+      },
+      {
+        "name": "Vault",
+        "version": "1.7.3+",
+        "url": "https://github.com/MilkBowl/Vault",
+        "required": true
+      }
+    ],
+    "installationInstructions": "1. Download the config.yml file\n2. Place it in your server's `plugins/Essentials/` directory\n3. Restart the server or run `/essentials reload`\n4. Verify settings with `/essentials config`",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-01-15",
+        "changes": ["Initial template release"]
+      }
+    ],
+    "license": "MIT",
+    "attribution": "Based on EssentialsX default configuration",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "config-yml",
+        "filename": "config.yml",
+        "contentType": "text/yaml",
+        "size": 12450,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "updatedAt": "2024-01-15T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-2",
+    "slug": "paper-server-optimization-guide",
+    "title": "Paper Server Optimization Guide",
+    "shortDescription": "Step-by-step guide to tuning PaperMC for performance: JVM flags, config tweaks, and monitoring.",
+    "description": "# Paper Server Optimization Guide\n\n**Development example resource** — A comprehensive guide for optimizing PaperMC servers.\n\n## Contents\n- JVM flags for different RAM allocations\n- `paper.yml` and `spigot.yml` key settings\n- Entity activation range tuning\n- Chunk loading optimization\n- Spark profiler usage\n- Common pitfalls\n\n## Target Audience\nServer admins running Paper 1.18+ with 4GB+ RAM.\n\n## Disclaimer\nSettings are starting points. **Always benchmark** before and after changes. What works for one server may not work for another.\n\n## License\nCC-BY-4.0 — Share and adapt with attribution.\n\n---\n*Example resource for development. No verified compatibility claims.*",
+    "category": "server-setup-guides",
+    "resourceType": "guide",
+    "tags": ["paper", "optimization", "performance", "jvm", "lag", "tuning"],
+    "thumbnail": "/images/resources/paper-optimization-thumb.png",
+    "screenshots": ["/images/resources/paper-optimization-preview.png"],
+    "minecraftVersions": ["1.18.2", "1.19.4", "1.20.4", "1.21.1", "latest"],
+    "serverSoftware": ["paper", "purpur"],
+    "dependencies": [
+      {
+        "name": "PaperMC",
+        "version": "1.18+",
+        "url": "https://papermc.io/",
+        "required": true
+      },
+      {
+        "name": "Spark Profiler",
+        "version": "1.9+",
+        "url": "https://github.com/lucko/spark",
+        "required": false
+      }
+    ],
+    "installationInstructions": "This is a guide, not a downloadable file. Read through and apply relevant settings to your server configuration files.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-02-01",
+        "changes": ["Initial guide release"]
+      }
+    ],
+    "license": "CC-BY-4.0",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "guide-md",
+        "filename": "paper-optimization-guide.md",
+        "contentType": "text/markdown",
+        "size": 45200,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-02-01T10:00:00Z",
+    "updatedAt": "2024-02-01T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-3",
+    "slug": "minimal-server-icon-pack",
+    "title": "Minimal Server Icon Pack",
+    "shortDescription": "64x64 server icons in PNG format — clean, minimal designs for server lists.",
+    "description": "# Minimal Server Icon Pack\n\n**Development example resource** — A set of 5 minimal server icons (64×64 PNG) suitable for Minecraft server lists.\n\n## Included\n- `icon-default.png` — Generic minimal logo\n- `icon-survival.png` — Survival-themed\n- `icon-creative.png` — Creative-themed\n- `icon-minigames.png` — Minigames-themed\n- `icon-rpg.png` — RPG-themed\n\n## Usage\nPlace any icon as `server-icon.png` in your server root directory.\n\n## License\nCC0 (Public Domain) — No attribution required.\n\n---\n*Example resource. Images are generated placeholders.*",
+    "category": "graphics-icons",
+    "resourceType": "pack",
+    "tags": ["icon", "server-icon", "64x64", "png", "minimal", "branding"],
+    "thumbnail": "/images/resources/icon-pack-thumb.png",
+    "screenshots": ["/images/resources/icon-pack-preview.png"],
+    "minecraftVersions": ["latest"],
+    "serverSoftware": ["paper", "spigot", "purpur", "fabric", "forge", "neoforge", "velocity", "bungeecord", "waterfall", "folia"],
+    "dependencies": [],
+    "installationInstructions": "1. Download the ZIP\n2. Extract your chosen icon\n3. Rename to `server-icon.png`\n4. Place in server root directory\n5. Restart server",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-02-15",
+        "changes": ["Initial icon pack release"]
+      }
+    ],
+    "license": "CC0-1.0",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "icon-pack-zip",
+        "filename": "minimal-server-icons.zip",
+        "contentType": "application/zip",
+        "size": 28500,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": false,
+    "isExample": true,
+    "createdAt": "2024-02-15T10:00:00Z",
+    "updatedAt": "2024-02-15T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-4",
+    "slug": "medieval-spawn-schematic",
+    "title": "Medieval Spawn Build (Schematic)",
+    "shortDescription": "A medium-sized medieval-themed spawn schematic (~120x120) for WorldEdit/FAWE.",
+    "description": "# Medieval Spawn Build\n\n**Development example resource** — A schematic file for a medieval spawn area.\n\n## Details\n- Dimensions: ~120×120×60 blocks\n- Style: Medieval/fantasy\n- Includes: Central hub, 4 paths, decoration, lighting\n- Format: `.schem` (WorldEdit/FAWE compatible)\n\n## Requirements\n- WorldEdit or FastAsyncWorldEdit\n- Server running 1.16+\n\n## Installation\n1. Place `.schem` in `worldedit/schematics/`\n2. Use `//schem load medieval-spawn`\n3. Use `//paste` at desired location\n\n## License\nCC-BY-NC-4.0 — Free for non-commercial use. Commercial use requires permission.\n\n---\n*Example resource. Schematic is a placeholder reference.*",
+    "category": "maps-builds",
+    "resourceType": "pack",
+    "tags": ["schematic", "spawn", "medieval", "worldedit", "fawe", "build"],
+    "thumbnail": "/images/resources/medieval-spawn-thumb.png",
+    "screenshots": ["/images/resources/medieval-spawn-preview-1.png", "/images/resources/medieval-spawn-preview-2.png"],
+    "minecraftVersions": ["1.16.5", "1.17.1", "1.18.2", "1.19.4", "1.20.4", "1.21.1", "latest"],
+    "serverSoftware": ["paper", "spigot", "purpur"],
+    "dependencies": [
+      {
+        "name": "WorldEdit or FAWE",
+        "version": "7.2+",
+        "url": "https://github.com/EngineHub/WorldEdit",
+        "required": true
+      }
+    ],
+    "installationInstructions": "1. Download the .schem file\n2. Place in `plugins/WorldEdit/schematics/` or `plugins/FastAsyncWorldEdit/schematics/`\n3. In-game: `//schem load medieval-spawn` then `//paste`",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-03-01",
+        "changes": ["Initial schematic release"]
+      }
+    ],
+    "license": "CC-BY-NC-4.0",
+    "attribution": "Build by NOTIXNODE Team",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "schematic-file",
+        "filename": "medieval-spawn.schem",
+        "contentType": "application/octet-stream",
+        "size": 2450000,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-03-01T10:00:00Z",
+    "updatedAt": "2024-03-01T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-5",
+    "slug": "vanilla-plus-resource-pack",
+    "title": "Vanilla+ Resource Pack (16x)",
+    "shortDescription": "A faithful 16x resource pack enhancing vanilla textures with subtle improvements.",
+    "description": "# Vanilla+ Resource Pack\n\n**Development example resource** — A 16× resource pack that stays true to vanilla while fixing inconsistencies and adding subtle depth.\n\n## Features\n- Connected textures (CTM) for glass, bookshelves, stone\n- Custom models for specific items\n- Improved GUI textures\n- Better foliage and grass transitions\n- OptiFine features (optional)\n\n## Compatibility\n- Minecraft 1.20.4, 1.21.1\n- Works with OptiFine or fabric-resource-loader\n\n## License\nAll Rights Reserved — Example only. Do not redistribute.\n\n---\n*Example resource. Pack contents are placeholder references.*",
+    "category": "resource-packs",
+    "resourceType": "pack",
+    "tags": ["resource-pack", "16x", "vanilla-plus", "ctm", "optifine", "textures"],
+    "thumbnail": "/images/resources/vanilla-plus-thumb.png",
+    "screenshots": ["/images/resources/vanilla-plus-preview-1.png", "/images/resources/vanilla-plus-preview-2.png"],
+    "minecraftVersions": ["1.20.4", "1.21.1", "latest"],
+    "serverSoftware": [],
+    "dependencies": [
+      {
+        "name": "OptiFine (recommended)",
+        "version": "1.20.4+",
+        "url": "https://optifine.net/",
+        "required": false
+      }
+    ],
+    "installationInstructions": "1. Download the .zip file\n2. Place in `.minecraft/resourcepacks/`\n3. Enable in Resource Packs menu\n4. For CTM: Install OptiFine",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-03-15",
+        "changes": ["Initial pack release"]
+      }
+    ],
+    "license": "All Rights Reserved",
+    "attribution": "Textures by NOTIXNODE Team",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "resource-pack-zip",
+        "filename": "vanilla-plus-16x.zip",
+        "contentType": "application/zip",
+        "size": 5200000,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": false,
+    "isExample": true,
+    "createdAt": "2024-03-15T10:00:00Z",
+    "updatedAt": "2024-03-15T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-6",
+    "slug": "discord-bot-config-template",
+    "title": "Discord Bot Configuration Template",
+    "shortDescription": "JSON config template for a Minecraft-Discord link bot with roles, channels, and messages.",
+    "description": "# Discord Bot Configuration Template\n\n**Development example resource** — A configuration template for a Minecraft↔Discord linking bot.\n\n## Features\n- Role sync configuration\n- Channel mappings (chat, logs, announcements)\n- Custom embed templates\n- Command permissions\n- Webhook settings\n\n## Supported Bots\n- DiscordSRV\n- Minecord\n- Custom bot implementations\n\n## License\nMIT — Free to use and modify.\n\n---\n*Example resource. Configuration is a template only.*",
+    "category": "discord-templates",
+    "resourceType": "template",
+    "tags": ["discord", "bot", "config", "template", "discordsrv", "minecord", "linking"],
+    "thumbnail": "/images/resources/discord-bot-config-thumb.png",
+    "screenshots": ["/images/resources/discord-bot-config-preview.png"],
+    "minecraftVersions": ["latest"],
+    "serverSoftware": ["paper", "spigot", "purpur", "fabric", "forge", "neoforge", "velocity", "bungeecord", "waterfall"],
+    "dependencies": [
+      {
+        "name": "DiscordSRV",
+        "version": "1.25+",
+        "url": "https://github.com/DiscordSRV/DiscordSRV",
+        "required": false
+      }
+    ],
+    "installationInstructions": "1. Download config.json\n2. Adapt values for your server/discord\n3. Place in bot's config directory\n4. Restart bot",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-04-01",
+        "changes": ["Initial template release"]
+      }
+    ],
+    "license": "MIT",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "config-json",
+        "filename": "discord-bot-config.json",
+        "contentType": "application/json",
+        "size": 8500,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": false,
+    "isExample": true,
+    "createdAt": "2024-04-01T10:00:00Z",
+    "updatedAt": "2024-04-01T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-7",
+    "slug": "luckperms-setup-tutorial",
+    "title": "LuckPerms Setup Tutorial",
+    "shortDescription": "Complete guide to setting up LuckPerms: groups, inheritance, prefixes, and context-based permissions.",
+    "description": "# LuckPerms Setup Tutorial\n\n**Development example resource** — A comprehensive tutorial for setting up LuckPerms from scratch.\n\n## Topics Covered\n- Installation and storage backends\n- Group hierarchy and inheritance\n- Prefix/suffix formatting\n- Context-based permissions (world, server)\n- Track system for promotions\n- Web editor usage\n- Migration from PermissionsEx\n\n## Prerequisites\n- Paper/Spigot/Purpur 1.16+\n- LuckPerms 5.4+\n\n## License\nCC-BY-SA-4.0 — Share alike with attribution.\n\n---\n*Example resource for development.*",
+    "category": "tutorials",
+    "resourceType": "tutorial",
+    "tags": ["luckperms", "permissions", "groups", "inheritance", "tutorial", "setup"],
+    "thumbnail": "/images/resources/luckperms-tutorial-thumb.png",
+    "screenshots": ["/images/resources/luckperms-tutorial-preview.png"],
+    "minecraftVersions": ["1.16.5", "1.17.1", "1.18.2", "1.19.4", "1.20.4", "1.21.1", "latest"],
+    "serverSoftware": ["paper", "spigot", "purpur", "fabric", "forge", "neoforge", "velocity", "bungeecord", "waterfall"],
+    "dependencies": [
+      {
+        "name": "LuckPerms",
+        "version": "5.4+",
+        "url": "https://luckperms.net/",
+        "required": true
+      }
+    ],
+    "installationInstructions": "This is a tutorial. Follow the steps in the guide to configure LuckPerms on your server.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-04-15",
+        "changes": ["Initial tutorial release"]
+      }
+    ],
+    "license": "CC-BY-SA-4.0",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "tutorial-md",
+        "filename": "luckperms-setup-tutorial.md",
+        "contentType": "text/markdown",
+        "size": 68000,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-04-15T10:00:00Z",
+    "updatedAt": "2024-04-15T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-8",
+    "slug": "plugin-dev-utils-library",
+    "title": "Plugin Developer Utilities Library",
+    "shortDescription": "A lightweight Java library with common utilities for Spigot/Paper plugin development.",
+    "description": "# Plugin Developer Utilities Library\n\n**Development example resource** — A small utility library for Minecraft plugin developers.\n\n## Modules\n- `ConfigManager` — YAML config loading/saving with comments\n- `MessageUtils` — MiniMessage, legacy codes, PlaceholderAPI support\n- `ItemBuilder` — Fluent item stack creation\n- `CommandFramework` — Annotation-based command registration\n- `TaskUtils` — Async/sync task helpers\n\n## Requirements\n- Java 17+\n- Spigot/Paper API 1.18+\n- Maven or Gradle\n\n## Installation (Maven)\n```xml\n<repository>\n  <id>notixnode-repo</id>\n  <url>https://repo.notixnode.example/</url>\n</repository>\n<dependency>\n  <groupId>dev.notixnode</groupId>\n  <artifactId>plugin-utils</artifactId>\n  <version>1.0.0</version>\n</dependency>\n```\n\n## License\nApache-2.0\n\n---\n*Example resource. Library is a placeholder reference.*",
+    "category": "developer-tools",
+    "resourceType": "tool",
+    "tags": ["plugin", "development", "java", "library", "spigot", "paper", "maven", "utils"],
+    "thumbnail": "/images/resources/plugin-utils-thumb.png",
+    "screenshots": ["/images/resources/plugin-utils-preview.png"],
+    "minecraftVersions": ["1.18.2", "1.19.4", "1.20.4", "1.21.1", "latest"],
+    "serverSoftware": ["paper", "spigot", "purpur"],
+    "dependencies": [
+      {
+        "name": "Paper API",
+        "version": "1.18+",
+        "url": "https://papermc.io/",
+        "required": true
+      }
+    ],
+    "installationInstructions": "Add the Maven dependency to your plugin project. See description for repository and coordinates.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-05-01",
+        "changes": ["Initial library release"]
+      }
+    ],
+    "license": "Apache-2.0",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "library-jar",
+        "filename": "plugin-utils-1.0.0.jar",
+        "contentType": "application/java-archive",
+        "size": 185000,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      },
+      {
+        "ref": "sources-jar",
+        "filename": "plugin-utils-1.0.0-sources.jar",
+        "contentType": "application/java-archive",
+        "size": 95000,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": false,
+    "isExample": true,
+    "createdAt": "2024-05-01T10:00:00Z",
+    "updatedAt": "2024-05-01T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-9",
+    "slug": "premium-custom-enchants-plugin",
+    "title": "Custom Enchants Plugin (Premium)",
+    "shortDescription": "Advanced custom enchantments plugin with 50+ unique enchants, API, and GUI editor. External checkout required.",
+    "description": "# Custom Enchants Plugin — Premium\n\n**Development example resource** — This demonstrates a premium resource entry with external checkout.\n\n## Features\n- 50+ custom enchantments\n- Enchantment GUI editor\n- API for developers\n- PlaceholderAPI expansion\n- LuckPerms integration\n- MySQL/SQLite support\n\n## Purchase\nThis is a **premium resource**. Purchase via external checkout:\n\n[**Purchase on BuiltByBit**](https://builtbybit.com/resources/custom-enchants.12345/) (example link)\n\n## License\nCommercial — See vendor terms.\n\n---\n*Example premium resource. No actual plugin file is hosted here.*",
+    "category": "premium-downloads",
+    "resourceType": "tool",
+    "tags": ["enchants", "custom-enchants", "premium", "api", "gui", "placeholderapi"],
+    "thumbnail": "/images/resources/custom-enchants-thumb.png",
+    "screenshots": ["/images/resources/custom-enchants-preview-1.png", "/images/resources/custom-enchants-preview-2.png"],
+    "minecraftVersions": ["1.19.4", "1.20.4", "1.21.1", "latest"],
+    "serverSoftware": ["paper", "spigot", "purpur"],
+    "dependencies": [
+      {
+        "name": "Paper/Spigot",
+        "version": "1.19+",
+        "url": "https://papermc.io/",
+        "required": true
+      },
+      {
+        "name": "PlaceholderAPI",
+        "version": "2.11+",
+        "url": "https://github.com/PlaceholderAPI/PlaceholderAPI",
+        "required": false
+      }
+    ],
+    "installationInstructions": "Purchase via the external link. Download the JAR from your account. Place in plugins/ and restart.",
+    "changelog": [
+      {
+        "version": "2.1.0",
+        "date": "2024-05-15",
+        "changes": ["Added 10 new enchants", "Fixed API event", "Improved GUI"]
+      }
+    ],
+    "license": "Commercial",
+    "author": {
+      "id": "example-dev",
+      "name": "ExampleDeveloper",
+      "url": "https://builtbybit.com/members/exampledev.123/",
+      "isVerified": false
+    },
+    "isPremium": true,
+    "externalCheckoutUrl": "https://builtbybit.com/resources/custom-enchants.12345/",
+    "licenseType": "single",
+    "files": [
+      {
+        "ref": "plugin-jar",
+        "filename": "CustomEnchants-2.1.0.jar",
+        "contentType": "application/java-archive",
+        "size": 420000,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": true
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-05-15T10:00:00Z",
+    "updatedAt": "2024-05-15T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-10",
+    "slug": "server-rules-template",
+    "title": "Server Rules Template",
+    "shortDescription": "A comprehensive, customizable server rules document in Markdown and plain text formats.",
+    "description": "# Server Rules Template\n\n**Development example resource** — A ready-to-use server rules template covering common categories.\n\n## Sections Included\n- General conduct\n- Chat rules\n- Gameplay integrity\n- Griefing/theft\n- Client modifications\n- Punishment guidelines\n- Appeal process\n\n## Formats\n- `rules.md` — Markdown (Discord, forums, websites)\n- `rules.txt` — Plain text (in-game, signs)\n- `rules.yml` — LuckPerms/Config compatible\n\n## License\nCC0 — Public domain. Customize freely.\n\n---\n*Example resource. Templates are original work.*",
+    "category": "server-setup-guides",
+    "resourceType": "template",
+    "tags": ["rules", "template", "server-rules", "guidelines", "policy", "markdown"],
+    "thumbnail": "/images/resources/server-rules-thumb.png",
+    "screenshots": ["/images/resources/server-rules-preview.png"],
+    "minecraftVersions": ["latest"],
+    "serverSoftware": ["paper", "spigot", "purpur", "fabric", "forge", "neoforge", "velocity", "bungeecord", "waterfall", "folia"],
+    "dependencies": [],
+    "installationInstructions": "1. Download the template files\n2. Customize for your server\n3. Publish to your website, Discord, or in-game",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-06-01",
+        "changes": ["Initial template release"]
+      }
+    ],
+    "license": "CC0-1.0",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "rules-md",
+        "filename": "server-rules.md",
+        "contentType": "text/markdown",
+        "size": 5200,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      },
+      {
+        "ref": "rules-txt",
+        "filename": "server-rules.txt",
+        "contentType": "text/plain",
+        "size": 4800,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      },
+      {
+        "ref": "rules-yml",
+        "filename": "server-rules.yml",
+        "contentType": "text/yaml",
+        "size": 5500,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": false,
+    "isExample": true,
+    "createdAt": "2024-06-01T10:00:00Z",
+    "updatedAt": "2024-06-01T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-11",
+    "slug": "server-setup-checklist",
+    "title": "Minecraft Server Setup Checklist",
+    "shortDescription": "Step-by-step pre-installation, configuration, and security checklist for new server administrators.",
+    "description": "# Minecraft Server Setup Checklist\n\n**Official NOTIXNODE Resource Template**\n\nA comprehensive checklist for launching and configuring a reliable Minecraft server from day zero.\n\n## Phases Covered\n1. **Pre-Installation:** Software selection, Java runtime verification, and port forwarding.\n2. **Installation:** EULA confirmation, server.properties baseline tuning, and core engine configuration.\n3. **Plugin Architecture:** Essential management plugins, permissions hierarchies, and anti-grief controls.\n4. **Security & Production Readiness:** Automated backups, firewall rules, and RCON protection.\n\n## License\nMIT — Free for personal and commercial server networks.",
+    "category": "server-setup-guides",
+    "resourceType": "template",
+    "tags": ["checklist", "setup", "sysadmin", "guide", "paper", "security"],
+    "thumbnail": "/images/resources/paper-optimization-thumb.png",
+    "screenshots": [],
+    "minecraftVersions": ["1.20.4", "1.21.1", "latest"],
+    "serverSoftware": ["paper", "purpur", "spigot", "velocity"],
+    "dependencies": [],
+    "installationInstructions": "Download the markdown checklist and track your deployment tasks across pre-install, configuration, and security steps.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-06-15",
+        "changes": ["Initial verified release"]
+      }
+    ],
+    "license": "MIT",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "setup-checklist-md",
+        "filename": "server-setup-checklist.md",
+        "contentType": "text/markdown",
+        "size": 2606,
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-06-15T10:00:00Z",
+    "updatedAt": "2024-06-15T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-12",
+    "slug": "server-maintenance-checklist",
+    "title": "Server Maintenance & Incident Checklist",
+    "shortDescription": "Daily, weekly, and monthly sysadmin routine checks for high-uptime Minecraft networks.",
+    "description": "# Server Maintenance & Incident Checklist\n\n**Official NOTIXNODE Resource Template**\n\nKeep your servers running at a constant 20.0 TPS with standard operating procedures for routine maintenance and incident recovery.",
+    "category": "server-setup-guides",
+    "resourceType": "template",
+    "tags": ["maintenance", "tps", "sop", "backup", "logs"],
+    "thumbnail": "/images/resources/paper-optimization-thumb.png",
+    "screenshots": [],
+    "minecraftVersions": ["latest"],
+    "serverSoftware": ["paper", "purpur", "spigot", "velocity", "bungeecord"],
+    "dependencies": [],
+    "installationInstructions": "Use as a recurring schedule template for sysadmins and network operations staff.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-06-20",
+        "changes": ["Initial release"]
+      }
+    ],
+    "license": "MIT",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "maintenance-checklist-md",
+        "filename": "server-maintenance-checklist.md",
+        "contentType": "text/markdown",
+        "size": 2324,
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": false,
+    "isExample": true,
+    "createdAt": "2024-06-20T10:00:00Z",
+    "updatedAt": "2024-06-20T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-13",
+    "slug": "plugin-inventory-tracker-csv",
+    "title": "Plugin Inventory & Dependency Spreadsheet (CSV)",
+    "shortDescription": "Production inventory spreadsheet for tracking plugin versions, dependencies, license compliance, and update statuses.",
+    "description": "# Plugin Inventory & Dependency Spreadsheet\n\nStructured CSV format for network administrators to log installed plugins, compatibility flags, database backends, load priorities, and license types.",
+    "category": "developer-tools",
+    "resourceType": "template",
+    "tags": ["csv", "spreadsheet", "inventory", "plugins", "dependencies"],
+    "thumbnail": "/images/resources/plugin-utils-thumb.png",
+    "screenshots": [],
+    "minecraftVersions": ["latest"],
+    "serverSoftware": ["paper", "purpur", "spigot", "velocity", "folia"],
+    "dependencies": [],
+    "installationInstructions": "Open in Google Sheets, Microsoft Excel, or LibreOffice Calc to manage your server plugin audit.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-06-25",
+        "changes": ["Initial CSV release"]
+      }
+    ],
+    "license": "CC0-1.0",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "plugin-inventory-csv",
+        "filename": "plugin-inventory-template.csv",
+        "contentType": "text/csv",
+        "size": 3574,
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-06-25T10:00:00Z",
+    "updatedAt": "2024-06-25T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-14",
+    "slug": "staff-application-and-ban-appeal-templates",
+    "title": "Staff Application & Ban Appeal Templates",
+    "shortDescription": "Ready-to-use moderation forms and ticket templates for Google Forms, Discord tickets, and forum portals.",
+    "description": "# Staff Application & Ban Appeal Templates\n\nProfessional, objective evaluation templates for prospective moderators and structured ban appeal questionnaires.",
+    "category": "discord-templates",
+    "resourceType": "template",
+    "tags": ["staff", "moderation", "ban-appeal", "discord", "forms"],
+    "thumbnail": "/images/resources/discord-bot-config-thumb.png",
+    "screenshots": [],
+    "minecraftVersions": ["latest"],
+    "serverSoftware": ["paper", "purpur", "spigot", "velocity", "bungeecord"],
+    "dependencies": [],
+    "installationInstructions": "Download markdown files and import into Discord ticket embeds or web forum application forms.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-07-01",
+        "changes": ["Initial release"]
+      }
+    ],
+    "license": "CC0-1.0",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "staff-app-md",
+        "filename": "staff-application-template.md",
+        "contentType": "text/markdown",
+        "size": 1820,
+        "isPremium": false
+      },
+      {
+        "ref": "ban-appeal-md",
+        "filename": "ban-appeal-template.md",
+        "contentType": "text/markdown",
+        "size": 1973,
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": false,
+    "isExample": true,
+    "createdAt": "2024-07-01T10:00:00Z",
+    "updatedAt": "2024-07-01T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-15",
+    "slug": "community-announcement-templates",
+    "title": "Community & Network Announcement Templates",
+    "shortDescription": "12 Discord embed announcement templates for maintenance windows, tournament launches, season resets, and store sales.",
+    "description": "# Community & Network Announcement Templates\n\nHigh-engagement Discord and web announcement templates with formatted header tags, variable placeholders, and emoji accents.",
+    "category": "discord-templates",
+    "resourceType": "template",
+    "tags": ["announcements", "discord", "embeds", "marketing", "updates"],
+    "thumbnail": "/images/resources/discord-bot-config-thumb.png",
+    "screenshots": [],
+    "minecraftVersions": ["latest"],
+    "serverSoftware": ["paper", "purpur", "velocity"],
+    "dependencies": [],
+    "installationInstructions": "Copy the appropriate template, replace placeholders like {server_name} and {time}, and send via Discord webhook or bot.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-07-05",
+        "changes": ["Initial template release"]
+      }
+    ],
+    "license": "MIT",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "announcements-md",
+        "filename": "announcement-templates.md",
+        "contentType": "text/markdown",
+        "size": 3674,
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": false,
+    "isExample": true,
+    "createdAt": "2024-07-05T10:00:00Z",
+    "updatedAt": "2024-07-05T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-16",
+    "slug": "backup-and-disaster-recovery-checklist",
+    "title": "Backup & Disaster Recovery Checklist",
+    "shortDescription": "Comprehensive 3-2-1 backup protocol, RPO/RTO planning, and live restore simulation runbook for Minecraft servers.",
+    "description": "# Backup & Disaster Recovery Checklist\n\n**Official NOTIXNODE Runbook**\n\nEnsures your Minecraft world data, player inventories, and MySQL database tables can be restored in minutes following hardware faults or world corruption.",
+    "category": "server-setup-guides",
+    "resourceType": "guide",
+    "tags": ["backup", "disaster-recovery", "restoration", "security", "mysql"],
+    "thumbnail": "/images/resources/paper-optimization-thumb.png",
+    "screenshots": [],
+    "minecraftVersions": ["latest"],
+    "serverSoftware": ["paper", "purpur", "spigot", "velocity", "fabric"],
+    "dependencies": [],
+    "installationInstructions": "Review each section and schedule monthly unannounced disaster recovery drills.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-07-10",
+        "changes": ["Initial release"]
+      }
+    ],
+    "license": "CC-BY-4.0",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "backup-checklist-md",
+        "filename": "backup-recovery-checklist.md",
+        "contentType": "text/markdown",
+        "size": 7607,
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-07-10T10:00:00Z",
+    "updatedAt": "2024-07-10T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  },
+  {
+    "id": "ex-17",
+    "slug": "paper-spigot-performance-configs",
+    "title": "Paper, Spigot & Bukkit Performance Configuration Bundle",
+    "shortDescription": "Tuned configuration files for paper.yml, spigot.yml, and bukkit.yml optimized for high entity counts and smooth chunk loading.",
+    "description": "# Paper, Spigot & Bukkit Performance Configuration Bundle\n\nProduction-tested YAML configuration files with lowered activation ranges, optimized hopper tick intervals, and bounded chunk autosaving.",
+    "category": "plugin-configurations",
+    "resourceType": "configuration",
+    "tags": ["paper", "spigot", "bukkit", "performance", "optimization", "yaml"],
+    "thumbnail": "/images/resources/paper-optimization-thumb.png",
+    "screenshots": [],
+    "minecraftVersions": ["1.20.4", "1.21.1", "latest"],
+    "serverSoftware": ["paper", "purpur", "spigot"],
+    "dependencies": [],
+    "installationInstructions": "Place files in the root or config/ directory of your server after backing up your current files.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-07-15",
+        "changes": ["Initial bundle release"]
+      }
+    ],
+    "license": "MIT",
+    "author": {
+      "id": "notixnode-team",
+      "name": "NOTIXNODE Team",
+      "url": "https://github.com/notixnode",
+      "isVerified": true
+    },
+    "isPremium": false,
+    "files": [
+      {
+        "ref": "paper-yml",
+        "filename": "paper.yml.example",
+        "contentType": "text/yaml",
+        "size": 2656,
+        "isPremium": false
+      },
+      {
+        "ref": "spigot-yml",
+        "filename": "spigot.yml.example",
+        "contentType": "text/yaml",
+        "size": 6176,
+        "isPremium": false
+      },
+      {
+        "ref": "bukkit-yml",
+        "filename": "bukkit.yml.example",
+        "contentType": "text/yaml",
+        "size": 2489,
+        "isPremium": false
+      }
+    ],
+    "status": "published",
+    "isFeatured": true,
+    "isExample": true,
+    "createdAt": "2024-07-15T10:00:00Z",
+    "updatedAt": "2024-07-15T10:00:00Z",
+    "downloadCount": 0,
+    "verifiedDownloadCount": 0
+  }
+]

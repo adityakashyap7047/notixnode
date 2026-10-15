@@ -1,0 +1,21 @@
+Name,Version,Author,Source URL,License,Category,Status,Load Order,Config File,Database,Dependencies,Notes,Last Updated,Update Available
+EssentialsX,2.20.1,EssentialsX Team,https://essentialsx.net/,GPL-3.0,Core,Enabled,1,config.yml,Flatfile,"Vault (required), PlaceholderAPI (optional)",Main economy/command plugin,2024-01-15,No
+LuckPerms,5.4.120,LuckPerms Team,https://luckperms.net/,MIT,Permissions,Enabled,2,config.yml,MySQL,"Vault (optional)",Primary permissions plugin,2024-02-01,No
+WorldEdit,7.3.0,EngineHub,https://github.com/EngineHub/WorldEdit,GPL-3.0,World,Enabled,3,config.yml,None,"FAWE (optional)",World editing tool,2024-01-20,Yes (7.3.1)
+WorldGuard,7.0.9,EngineHub,https://github.com/EngineHub/WorldGuard,GPL-3.0,Protection,Enabled,4,config.yml,None,"WorldEdit (required)",Region protection,2024-01-20,No
+DiscordSRV,1.27.0,DiscordSRV Team,https://github.com/DiscordSRV/DiscordSRV,MIT,Chat,Enabled,5,config.yml,None,"LuckPerms (optional)",Discord integration,2024-03-01,No
+Vault,1.7.3,MilkBowl,https://github.com/MilkBowl/Vault,GPL-3.0,Economy,Enabled,6,config.yml,None,None,"Required by many plugins",Economy/permissions API,2023-12-01,No
+PlaceholderAPI,2.11.6,PlaceholderAPI Team,https://github.com/PlaceholderAPI/PlaceholderAPI,MIT,Utility,Enabled,7,config.yml,None,None,"Many expansions available",Placeholder system,2024-02-15,No
+GriefPrevention,16.13.0,GriefPrevention Team,https://github.com/GriefPrevention/GriefPrevention,GPL-3.0,Protection,Enabled,8,config.yml,Flatfile,"LuckPerms (optional)",Land claiming,2024-01-10,Yes (16.14.0)
+CoreProtect,21.2,CoreProtect Team,https://github.com/CoreProtect/CoreProtect,GPL-3.0,Logging,Enabled,9,config.yml,MySQL,None,"Block logging & rollback",2024-03-15,No
+Spark,1.10.3,lucko,https://github.com/lucko/spark,MIT,Performance,Enabled,10,config.yml,None,None,"Profiler & TPS monitor",2024-02-20,No
+Dynmap,3.4-beta-1,Dynmap Team,https://github.com/webbukkit/dynmap,GPL-3.0,Map,Enabled,11,configuration.txt,SQLite,"WorldGuard (optional)",Live map,2024-01-05,Yes (3.4-beta-2)
+ChestShop,3.9.12,ChestShop Team,https://github.com/ChestShop/ChestShop,GPL-3.0,Economy,Enabled,12,config.yml,Flatfile,"Vault (required), Economy plugin (required)",Player shops,2023-11-15,No
+Jobs,5.1.1,Jobs Team,https://github.com/Jobs/Jobs,GPL-3.0,Economy,Enabled,13,config.yml,MySQL,"Vault (required), Economy plugin (required)",Job system,2024-01-25,No
+mcMMO,2.0.0,mcMMO Team,https://github.com/mcMMO-Dev/mcMMO,GPL-3.0,Gameplay,Enabled,14,config.yml,MySQL,"PlaceholderAPI (optional)",Skills/RPG,2023-10-01,No
+Citizens,2.0.31,Citizens Team,https://github.com/CitizensNPC/Citizens,GPL-3.0,NPC,Enabled,15,config.yml,None,"Sentinel (optional), Denizen (optional)",NPC plugin,2024-02-10,No
+Sentinel,1.8.12,Sentinel Team,https://github.com/CitizensNPC/Sentinel,GPL-3.0,NPC,Enabled,16,config.yml,None,"Citizens (required)",NPC guards,2024-01-15,No
+ProtocolLib,5.2.0,ProtocolLib Team,https://github.com/ProtocolLib/ProtocolLib,GPL-3.0,Developer,Enabled,17,config.yml,None,None,"Packet manipulation API",2024-03-01,No
+FastAsyncWorldEdit,3.4.0,FAWE Team,https://github.com/IntellectualSites/FastAsyncWorldEdit,GPL-3.0,World,Enabled,18,config.yml,None,"WorldEdit (required)",Async WorldEdit,2024-02-01,No
+Multiverse-Core,4.4.0,Multiverse Team,https://github.com/Multiverse/Multiverse-Core,GPL-3.0,World,Enabled,19,config.yml,Flatfile,"Multiverse-Portals (optional)",Multi-world,2023-12-15,No
+ServerRestorer,1.0,Custom,https://github.com/example/ServerRestorer,MIT,Utility,Enabled,20,config.yml,None,None,"Custom backup/restore script",2024-01-01,N/A

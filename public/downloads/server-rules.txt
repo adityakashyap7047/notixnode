@@ -1,0 +1,19 @@
+================================================================================
+MINECRAFT SERVER RULES & COMMUNITY STANDARDS
+================================================================================
+
+1. GENERAL CONDUCT
+- Treat all community members and staff with respect.
+- Zero tolerance for hate speech, harassment, discrimination, or threats.
+- Doxxing, swatting, or sharing private details results in an instant permanent ban.
+
+2. FAIR PLAY & INTEGRITY
+- Any client modifications providing an unfair advantage (x-ray, fly, killaura) are forbidden.
+- Duplication glitches and exploit abuse will result in an economy/inventory reset and ban.
+- No griefing or stealing within or adjacent to claimed regions.
+
+3. CHAT DISCIPLINE
+- No unauthorized advertising of external servers, channels, or services.
+- No spamming, flood, or continuous capital letters.
+- Follow all directions issued by active staff moderators.
+================================================================================

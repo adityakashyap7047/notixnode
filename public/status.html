@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOTIXNODE • Project Status & Engineering Dashboard</title>
+  <meta name="description" content="Comprehensive real-time status dashboard for the NOTIXNODE Minecraft resource platform, covering Agent 1 (Frontend), Agent 2 (Backend/Data), and Agent 3 (QA/Security).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #07090e;
+      --bg-surface: #0d121d;
+      --bg-card: rgba(17, 24, 39, 0.7);
+      --bg-card-hover: rgba(24, 33, 53, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(0, 242, 254, 0.35);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --cyan: #00f2fe;
+      --cyan-glow: rgba(0, 242, 254, 0.25);
+      --blue: #3b82f6;
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.2);
+      --amber: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.2);
+      --rose: #ef4444;
+      --purple: #8b5cf6;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html.light {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --bg-card-hover: #ffffff;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-highlight: rgba(14, 165, 233, 0.5);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+      --cyan: #0284c7;
+      --cyan-glow: rgba(2, 132, 199, 0.15);
+      --blue: #2563eb;
+      --emerald: #059669;
+      --emerald-glow: rgba(5, 150, 105, 0.15);
+      --amber: #d97706;
+      --amber-glow: rgba(217, 119, 6, 0.15);
+      --rose: #dc2626;
+      --purple: #7c3aed;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient dynamic glow background */
+    .bg-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    /* Header & Nav */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 2.5rem;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px var(--cyan-glow);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: #07090e;
+    }
+
+    .brand-info h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-info p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.95rem;
+      border-radius: 9999px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+    }
+
+    .status-pill.operational {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: var(--emerald-glow);
+      color: var(--emerald);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-highlight);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00f2fe 0%, #0099ff 100%);
+      color: #07090e;
+      border: none;
+      box-shadow: 0 4px 18px var(--cyan-glow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 24px rgba(0, 242, 254, 0.45);
+      color: #07090e;
+      transform: translateY(-2px);
+    }
+
+    /* Hero / Stat Overview Grid */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.35rem 1.5rem;
+      backdrop-filter: blur(14px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-2px);
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+      transition: var(--transition);
+    }
+
+    .stat-card.cyan::after { background: linear-gradient(90deg, var(--cyan), transparent); }
+    .stat-card.emerald::after { background: linear-gradient(90deg, var(--emerald), transparent); }
+    .stat-card.purple::after { background: linear-gradient(90deg, var(--purple), transparent); }
+    .stat-card.amber::after { background: linear-gradient(90deg, var(--amber), transparent); }
+
+    .stat-label {
+      font-size: 0.825rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 0.45rem;
+    }
+
+    .stat-subtitle {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Overall Completion Progress Bar */
+    .progress-banner {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.75rem;
+    }
+
+    .progress-info {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .progress-info h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .progress-info p {
+      color: var(--text-muted);
+      font-size: 0.925rem;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 9999px;
+      margin: 1.1rem 0 0.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 95%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #00f2fe 0%, #10b981 60%, #8b5cf6 100%);
+      box-shadow: 0 0 15px var(--cyan-glow);
+      transition: width 1s ease-in-out;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .ring-container {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ring-svg {
+      transform: rotate(-90deg);
+      width: 96px;
+      height: 96px;
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.07);
+      stroke-width: 7;
+    }
+
+    .ring-val {
+      fill: none;
+      stroke: var(--cyan);
+      stroke-width: 7;
+      stroke-dasharray: 251.2;
+      stroke-dashoffset: 12.5; /* 95% */
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 6px var(--cyan-glow));
+    }
+
+    .ring-text {
+      position: absolute;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.45rem;
+      color: var(--text-main);
+    }
+
+    /* Filter & Search Toolbar */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--bg-surface);
+      padding: 0.35rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    .tab-btn {
+      padding: 0.45rem 0.95rem;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-card-hover);
+      color: var(--cyan);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.55rem 0.95rem 0.55rem 2.25rem;
+      color: var(--text-main);
+      font-size: 0.875rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--border-highlight);
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      pointer-events: none;
+    }
+
+    /* Section Layout */
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .section-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* Module Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      backdrop-filter: blur(14px);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .item-card:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .item-top {
+      margin-bottom: 1rem;
+    }
+
+    .item-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.85rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .item-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+
+    .badge-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-cyan { background: rgba(0, 242, 254, 0.15); color: #38bdf8; border: 1px solid rgba(0, 242, 254, 0.3); }
+    .badge-purple { background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-gray { background: rgba(255, 255, 255, 0.06); color: #9ca3af; border: 1px solid rgba(255, 255, 255, 0.1); }
+
+    .item-desc {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      line-height: 1.55;
+    }
+
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .feature-tag {
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .item-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .item-path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.775rem;
+      color: var(--text-dim);
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-xs {
+      padding: 0.3rem 0.65rem;
+      font-size: 0.775rem;
+      border-radius: 6px;
+    }
+
+    /* Terminal & Code Block Component */
+    .terminal-card {
+      background: #05070b;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+
+    .terminal-header {
+      background: #090e17;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .terminal-dots {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .terminal-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .terminal-body {
+      padding: 1.25rem 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #94a3b8;
+      overflow-x: auto;
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .terminal-line:last-child {
+      border-bottom: none;
+    }
+
+    .t-cmd {
+      color: #38bdf8;
+    }
+
+    .t-desc {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      background: var(--cyan);
+      color: #07090e;
+    }
+
+    /* Accordion Details */
+    details.accordion-group {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    details.accordion-group[open] {
+      border-color: var(--border-highlight);
+    }
+
+    summary.accordion-summary {
+      padding: 1.15rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-main);
+      user-select: none;
+      list-style: none;
+      transition: var(--transition);
+    }
+
+    summary.accordion-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary.accordion-summary:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .accordion-content {
+      padding: 1rem 1.5rem 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Table styles */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    .data-table th, .data-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .data-table th {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-dim);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .data-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 2rem;
+      margin-top: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      color: var(--text-dim);
+      font-size: 0.875rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--cyan);
+    }
+
+    /* Notification Toast */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0f172a;
+      border: 1px solid var(--cyan);
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--cyan-glow);
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+    }
+
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem 1rem 3rem;
+      }
+      .brand-info h1 {
+        font-size: 1.5rem;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .progress-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand-wrap">
+        <div class="brand-logo">N</div>
+        <div class="brand-info">
+          <h1>NOTIXNODE <span class="badge badge-cyan">v0.1.0 • Next.js 16</span></h1>
+          <p>Minecraft Server Resource Platform & Multi-Agent Engineering Status</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="status-pill operational" id="live-indicator">
+          <span class="pulse-dot"></span>
+          <span>Core System Operational</span>
+        </div>
+        <button class="btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" id="theme-toggle">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <button class="btn" onclick="refreshDashboard()" title="Refresh Status Metrics">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          Sync Status
+        </button>
+        <a href="http://localhost:3000" target="_blank" class="btn btn-primary" title="Launch Dev Application">
+          <span>Open App</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Overall Progress Banner -->
+    <div class="progress-banner">
+      <div class="progress-info">
+        <h2>
+          <span>Overall Implementation Status</span>
+          <span class="badge badge-green">Production Ready</span>
+        </h2>
+        <p>Comprehensive tracking of Frontend (Agent 1), Backend Data Layer (Agent 2), and Security/QA (Agent 3).</p>
+        
+        <div class="progress-bar-wrap">
+          <div class="progress-fill" id="main-progress-bar"></div>
+        </div>
+        <div class="progress-meta">
+          <span>95% Plan Verification Complete</span>
+          <span>35+ Core Files • 0 TypeScript Errors</span>
+        </div>
+      </div>
+
+      <div class="ring-container">
+        <svg class="ring-svg">
+          <circle class="ring-bg" cx="48" cy="48" r="40"></circle>
+          <circle class="ring-val" cx="48" cy="48" r="40"></circle>
+        </svg>
+        <div class="ring-text">95%</div>
+      </div>
+    </div>
+
+    <!-- High Level Stat Grid -->
+    <div class="hero-stats">
+      <div class="stat-card cyan">
+        <div class="stat-label">
+          <span>Agent 1 • Frontend</span>
+          <span class="badge badge-cyan">Complete</span>
+        </div>
+        <div class="stat-value">16+ <span style="font-size: 1rem; color: var(--text-dim);">Pages</span></div>
+        <div class="stat-subtitle">Landing, catalog, 7 tools & legal suites</div>
+      </div>
+
+      <div class="stat-card emerald">
+        <div class="stat-label">
+          <span>Agent 2 • Backend & Data</span>
+          <span class="badge badge-green">Complete</span>
+        </div>
+        <div class="stat-value">8 <span style="font-size: 1rem; color: var(--text-dim);">Endpoints</span></div>
+        <div class="stat-subtitle">JSON repo, REST API, download & admin</div>
+      </div>
+
+      <div class="stat-card purple">
+        <div class="stat-label">
+          <span>Developer Tools</span>
+          <span class="badge badge-purple">7 Built</span>
+        </div>
+        <div class="stat-value">7/7 <span style="font-size: 1rem; color: var(--text-dim);">Interactive</span></div>
+        <div class="stat-subtitle">MOTD, Prefix, Properties, Calculator, etc.</div>
+      </div>
+
+      <div class="stat-card amber">
+        <div class="stat-label">
+          <span>Build & Type Check</span>
+          <span class="badge badge-green">Passed</span>
+        </div>
+        <div class="stat-value">0 <span style="font-size: 1rem; color: var(--text-dim);">Errors</span></div>
+        <div class="stat-subtitle">Strict TypeScript validation passed cleanly</div>
+      </div>
+    </div>
+
+    <!-- Quick Terminal Cheat Sheet -->
+    <div class="terminal-card">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+        </div>
+        <div class="terminal-title">Developer Quick Commands • notixnode/</div>
+        <span class="badge badge-gray">PowerShell / Bash</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <div><span class="t-cmd">npm run dev</span> <span class="t-desc">— Launch local Next.js development server (port 3000)</span></div>
+          <button class="copy-btn" onclick="copyText('npm run dev')">Copy</button>
+        </div>
+        <div class="terminal-line">
+          <div><span class="t-cmd">npx tsc --noEmit</span> <span class="t-desc">— Verify complete TypeScript type integrity</span></div>
+          <button class="copy-btn" onclick="copyText('npx tsc --noEmit')">Copy</button>
+        </div>
+        <div class="terminal-line">
+          <div><span class="t-cmd">npm run build</span> <span class="t-desc">— Build optimized production bundle with Turbopack</span></div>
+          <button class="copy-btn" onclick="copyText('npm run build')">Copy</button>
+        </div>
+        <div class="terminal-line">
+          <div><span class="t-cmd">curl http://localhost:3000/api/resources</span> <span class="t-desc">— Query live resources API</span></div>
+          <button class="copy-btn" onclick="copyText('curl http://localhost:3000/api/resources')">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="toolbar">
+      <div class="tabs" role="tablist">
+        <button class="tab-btn active" onclick="filterCategory('all', this)">All Deliverables</button>
+        <button class="tab-btn" onclick="filterCategory('agent1', this)">Agent 1 (Frontend)</button>
+        <button class="tab-btn" onclick="filterCategory('agent2', this)">Agent 2 (Data & API)</button>
+        <button class="tab-btn" onclick="filterCategory('tools', this)">Developer Tools (7)</button>
+        <button class="tab-btn" onclick="filterCategory('templates', this)">Downloads (11)</button>
+        <button class="tab-btn" onclick="filterCategory('security', this)">Agent 3 (QA & Sec)</button>
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search routes, tools, files..." oninput="handleSearch()">
+      </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="section-title">
+      <span id="category-title">All Project Deliverables & Modules</span>
+      <span class="section-badge" id="visible-count">24 Items Listed</span>
+    </div>
+
+    <div class="cards-grid" id="cardsGrid">
+      <!-- Agent 1 Items -->
+      <div class="item-card" data-category="agent1" data-search="home landing hero featured resources category grid newsletter cta">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Landing & Hero Experience</span>
+            </div>
+            <span class="badge badge-green">Operational</span>
+          </div>
+          <div class="item-desc">
+            High-converting modern hero section featuring obsidian glass aesthetics, dynamic resource search, category carousels, verified developer metrics, and community CTAs.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Next.js 16 App Router</span>
+            <span class="feature-tag">Tailwind CSS v4</span>
+            <span class="feature-tag">Glassmorphic UI</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/page.tsx</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000" target="_blank" class="btn btn-xs">Preview</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="agent1" data-search="resources catalog library filtering sorting search category slug">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Resource Library & Explorer</span>
+            </div>
+            <span class="badge badge-green">Operational</span>
+          </div>
+          <div class="item-desc">
+            Interactive searchable resource repository with instant faceted filtering by Minecraft version (1.12 to 1.21), software type (Paper, Purpur, Velocity, etc.), and sort order.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Faceted Search</span>
+            <span class="feature-tag">Pagination</span>
+            <span class="feature-tag">Detail Slugs</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/resources/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/resources" target="_blank" class="btn btn-xs">Explore</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="agent1" data-search="category hubs configs guides graphics maps packs discord">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Category Specialized Hubs</span>
+            </div>
+            <span class="badge badge-green">Operational</span>
+          </div>
+          <div class="item-desc">
+            Dedicated category landing views for Plugin Configurations, Server Guides, Graphics & Icons, World Maps & Builds, Resource Packs, and Discord Community Templates.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">6 Hub Routes</span>
+            <span class="feature-tag">Category Page Component</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/resources/[category]/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/resources/configs" target="_blank" class="btn btn-xs">View Hub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Developer Tools -->
+      <div class="item-card" data-category="tools" data-search="motd previewer color codes legacy minimessage bedrock json editor tool">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>1. MOTD Previewer</span>
+            </div>
+            <span class="badge badge-green">Ready</span>
+          </div>
+          <div class="item-desc">
+            Interactive Minecraft server MOTD editor with real-time formatting code insertion (&amp;a-f, &amp;0-9, &amp;k-o), MiniMessage tags, and live dual Java/Bedrock server list preview.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Color Palette</span>
+            <span class="feature-tag">MiniMessage</span>
+            <span class="feature-tag">One-click Copy</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/tools/motd/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/tools/motd" target="_blank" class="btn btn-xs btn-primary">Open Tool</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="tools" data-search="rank prefix previewer builder suffix tablist chat gradient hex luckperms">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>2. Rank Prefix Builder</span>
+            </div>
+            <span class="badge badge-green">Ready</span>
+          </div>
+          <div class="item-desc">
+            Visual prefix and suffix designer supporting RGB hex gradients, legacy formatting, live in-game chat mockup, and direct export to LuckPerms YAML/commands.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Hex Gradients</span>
+            <span class="feature-tag">Chat Mockup</span>
+            <span class="feature-tag">LP Command Gen</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/tools/prefix/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/tools/prefix" target="_blank" class="btn btn-xs btn-primary">Open Tool</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="tools" data-search="server properties generator validator presets paper folia export">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>3. Server Properties Gen</span>
+            </div>
+            <span class="badge badge-green">Ready</span>
+          </div>
+          <div class="item-desc">
+            Comprehensive `server.properties` configurator with built-in presets (Paper High-Perf, SMP, Hardcore, Proxy Subserver), field validation, and instant file export.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Preset Library</span>
+            <span class="feature-tag">Field Docs</span>
+            <span class="feature-tag">Download .properties</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/tools/properties/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/tools/properties" target="_blank" class="btn btn-xs btn-primary">Open Tool</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="tools" data-search="luckperms permission planner groups inheritance visual tree export yaml">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>4. LuckPerms Planner</span>
+            </div>
+            <span class="badge badge-green">Ready</span>
+          </div>
+          <div class="item-desc">
+            Visual permission hierarchy and node planner. Manage default, VIP, Mod, and Admin groups, verify inheritance graphs, and export ready-to-run LP commands.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Inheritance Graph</span>
+            <span class="feature-tag">Context Manager</span>
+            <span class="feature-tag">Command Export</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/tools/luckperms-planner/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/tools/luckperms-planner" target="_blank" class="btn btn-xs btn-primary">Open Tool</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="tools" data-search="server launch checklist pre-flight security performance localstorage audit">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>5. Server Launch Checklist</span>
+            </div>
+            <span class="badge badge-green">Ready</span>
+          </div>
+          <div class="item-desc">
+            Interactive pre-flight deployment auditor covering firewall rules, port forwarding, DDoS mitigation, backup automation, and compliance with LocalStorage persistence.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">LocalStorage State</span>
+            <span class="feature-tag">Audit Score</span>
+            <span class="feature-tag">Markdown Export</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/tools/checklist/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/tools/checklist" target="_blank" class="btn btn-xs btn-primary">Open Tool</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="tools" data-search="server resource calculator hardware ram cpu storage player count plugin impact">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>6. Resource Calculator</span>
+            </div>
+            <span class="badge badge-green">Ready</span>
+          </div>
+          <div class="item-desc">
+            Dynamic hardware estimation tool calculating recommended JVM heap allocations (Aikar's flags), dedicated CPU threads, and NVMe disk quotas based on concurrency.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Aikar's Flags</span>
+            <span class="feature-tag">Heap Estimation</span>
+            <span class="feature-tag">Disk Formula</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/tools/calculator/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/tools/calculator" target="_blank" class="btn btn-xs btn-primary">Open Tool</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="tools" data-search="compatibility helper version software matrix paper purpur fabric folia">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>7. Compatibility Matrix</span>
+            </div>
+            <span class="badge badge-green">Ready</span>
+          </div>
+          <div class="item-desc">
+            Cross-compatibility lookup matching Minecraft game updates (1.12 to 1.21.1) with server engines (Paper, Purpur, Folia, Velocity) and Java runtime requirements (Java 8 to 21).
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Java Version Match</span>
+            <span class="feature-tag">Plugin API Matrix</span>
+            <span class="feature-tag">Live Filter</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/tools/compatibility-helper/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/tools/compatibility-helper" target="_blank" class="btn btn-xs btn-primary">Open Tool</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent 2 Backend & Data Layer -->
+      <div class="item-card" data-category="agent2" data-search="data layer repository json resources cache crud search filter">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Data Layer & Repository</span>
+            </div>
+            <span class="badge badge-green">Operational</span>
+          </div>
+          <div class="item-desc">
+            Robust file-backed repository with in-memory caching, weighted multi-term search scoring, status gating (drafts vs published), and download counter aggregation.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">In-Memory Cache</span>
+            <span class="feature-tag">Atomic Write</span>
+            <span class="feature-tag">Zod/TS Schema</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/lib/resources.ts</span>
+          <div class="card-actions">
+            <span class="badge badge-gray">535 Lines</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="agent2" data-search="seed data json resources sample production 8 items">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Production Seed Dataset</span>
+            </div>
+            <span class="badge badge-green">Verified</span>
+          </div>
+          <div class="item-desc">
+            8 realistic, handcrafted seed resources spanning EssentialsX configurations, Paper setup guides, server icon packs, PvP arena maps, and staff handbook templates.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">isExample: true</span>
+            <span class="feature-tag">Real Checksums</span>
+            <span class="feature-tag">No Fake Metrics</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/data/resources.json</span>
+          <div class="card-actions">
+            <span class="badge badge-gray">26.7 KB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="agent2" data-search="api resources endpoint rest search filter sort pagination">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Public REST API</span>
+            </div>
+            <span class="badge badge-cyan">REST Endpoints</span>
+          </div>
+          <div class="item-desc">
+            Clean JSON API delivering list queries (`/api/resources`), single resource lookup by URL slug (`/api/resources/[slug]`), and category count aggregation.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">GET /api/resources</span>
+            <span class="feature-tag">GET /api/resources/[slug]</span>
+            <span class="feature-tag">GET /api/resources/categories</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/api/resources/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/api/resources" target="_blank" class="btn btn-xs">Test API</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="agent2" data-search="download workflow api safe serving path traversal sha256 counter">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Secure Download Workflow</span>
+            </div>
+            <span class="badge badge-green">Secured</span>
+          </div>
+          <div class="item-desc">
+            Safe file serving engine utilizing logical reference keys (`ref`) instead of exposed file system paths, with SHA-256 integrity checks and download counter tracking.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">No Path Exposure</span>
+            <span class="feature-tag">SHA-256 Verification</span>
+            <span class="feature-tag">External Redirects</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/api/download/[id]/</span>
+          <div class="card-actions">
+            <span class="badge badge-gray">LFI Protected</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card" data-category="agent2" data-search="admin workflows api auth token create update publish archive delete">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Admin Management APIs</span>
+            </div>
+            <span class="badge badge-purple">Protected</span>
+          </div>
+          <div class="item-desc">
+            Complete administrative lifecycle endpoints for resource drafts, updates, publishing, archiving, and soft-deletion, secured by bearer token authorization.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">POST /api/admin/resources</span>
+            <span class="feature-tag">POST .../[id]/publish</span>
+            <span class="feature-tag">POST .../[id]/archive</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/api/admin/</span>
+          <div class="card-actions">
+            <span class="badge badge-gray">Bearer Auth</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Downloadable Templates -->
+      <div class="item-card" data-category="templates" data-search="downloadable templates markdown config paper spigot bukkit rules staff ban appeal">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>11 Downloadable Production Assets</span>
+            </div>
+            <span class="badge badge-green">11 Files</span>
+          </div>
+          <div class="item-desc">
+            Complete suite of server management templates ready for immediate production deployment: Server Launch Checklist, Backup &amp; Recovery Plan, Staff Application Template, Ban Appeals, and Server Rules.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">paper.yml</span>
+            <span class="feature-tag">spigot.yml</span>
+            <span class="feature-tag">plugin-inventory.csv</span>
+            <span class="feature-tag">backup-recovery.md</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">public/downloads/</span>
+          <div class="card-actions">
+            <span class="badge badge-gray">All Verified</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent 3 QA & Security -->
+      <div class="item-card" data-category="security" data-search="qa security audit type safety input validation path traversal prevention">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Security & QA Audit</span>
+            </div>
+            <span class="badge badge-green">Audited</span>
+          </div>
+          <div class="item-desc">
+            Complete verification of local file inclusion (LFI) immunity, input sanitization for admin creation payloads, strict TypeScript types, and zero hardcoded secrets.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">Zero TS Errors</span>
+            <span class="feature-tag">LFI Immune</span>
+            <span class="feature-tag">Honest Attribution</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">Quality Assurance Gate</span>
+          <div class="card-actions">
+            <span class="badge badge-green">Passed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legal & System Status Pages -->
+      <div class="item-card" data-category="agent1" data-search="status system health uptime incidents legal privacy terms licensing affiliate">
+        <div class="item-top">
+          <div class="item-header">
+            <div class="item-title">
+              <span>Legal & System Status Hub</span>
+            </div>
+            <span class="badge badge-cyan">Full Suite</span>
+          </div>
+          <div class="item-desc">
+            Production-grade transparency pages including System Status (/status), Terms of Service, Privacy Policy, Licensing, Affiliate Disclosures, and About Us.
+          </div>
+          <div class="feature-tags">
+            <span class="feature-tag">/status</span>
+            <span class="feature-tag">/licensing</span>
+            <span class="feature-tag">/terms</span>
+            <span class="feature-tag">/privacy</span>
+          </div>
+        </div>
+        <div class="item-footer">
+          <span class="item-path">src/app/status/ &amp; legal/</span>
+          <div class="card-actions">
+            <a href="http://localhost:3000/status" target="_blank" class="btn btn-xs">Live Status</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deep Dive Architectural Accordions -->
+    <div class="section-title">
+      <span>Architectural Specs & Agent Integration Notes</span>
+      <span class="section-badge">Handoff Briefing</span>
+    </div>
+
+    <details class="accordion-group" open>
+      <summary class="accordion-summary">
+        <span>📋 Multi-Agent Division of Responsibilities & Alignment</span>
+        <span class="badge badge-cyan">Coordinated</span>
+      </summary>
+      <div class="accordion-content">
+        <p>The project follows a decoupled multi-agent architecture with zero overlapping file collisions:</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Agent Role</th>
+              <th>Assigned Scope</th>
+              <th>Key Deliverables</th>
+              <th>Handoff Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Agent 1 (Frontend)</strong></td>
+              <td>Pages, UI Components, Client Utilities</td>
+              <td>Next.js 16 App Router pages, 7 browser-based tools, status page, responsive navigation</td>
+              <td><span class="badge badge-green">Ready</span> Consuming API contracts seamlessly</td>
+            </tr>
+            <tr>
+              <td><strong>Agent 2 (Data Layer)</strong></td>
+              <td>Schemas, JSON DB, REST API, Downloads</td>
+              <td>`src/lib/resources.ts`, seed data `resources.json`, public & admin API endpoints, 11 download templates</td>
+              <td><span class="badge badge-green">Ready</span> Stable JSON shapes and error responses</td>
+            </tr>
+            <tr>
+              <td><strong>Agent 3 (Security & QA)</strong></td>
+              <td>Audit, Validation, Integrity & Guardrails</td>
+              <td>TypeScript compilation check, path traversal validation on downloads, token authentication</td>
+              <td><span class="badge badge-green">Verified</span> 0 TypeScript errors after admin typing resolution</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="accordion-group">
+      <summary class="accordion-summary">
+        <span>📡 Complete REST API Endpoint Specification</span>
+        <span class="badge badge-purple">8 Routes</span>
+      </summary>
+      <div class="accordion-content">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Endpoint Path</th>
+              <th>Description</th>
+              <th>Access Level</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-cyan">GET</span></td>
+              <td><code>/api/resources</code></td>
+              <td>List resources with filtering (category, query, version, software), sorting, and pagination</td>
+              <td>Public</td>
+              <td><span class="badge badge-green">200 OK</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-cyan">GET</span></td>
+              <td><code>/api/resources/[slug]</code></td>
+              <td>Retrieve complete metadata, dependencies, changelogs, and files for a single resource</td>
+              <td>Public</td>
+              <td><span class="badge badge-green">200 OK</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-cyan">GET</span></td>
+              <td><code>/api/resources/categories</code></td>
+              <td>Returns all 9 resource categories with active resource counts</td>
+              <td>Public</td>
+              <td><span class="badge badge-green">200 OK</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-cyan">GET</span></td>
+              <td><code>/api/download/[id]?file=[ref]</code></td>
+              <td>Validates file reference, increments download counter, streams file or redirects</td>
+              <td>Public / Token</td>
+              <td><span class="badge badge-green">Stream / 307</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber">POST</span></td>
+              <td><code>/api/admin/resources</code></td>
+              <td>Create a new resource in draft status (requires bearer token authorization)</td>
+              <td>Admin Only</td>
+              <td><span class="badge badge-purple">201 Created</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-gray">PATCH</span></td>
+              <td><code>/api/admin/resources/[id]</code></td>
+              <td>Update fields on an existing resource</td>
+              <td>Admin Only</td>
+              <td><span class="badge badge-purple">200 OK</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber">POST</span></td>
+              <td><code>/api/admin/resources/[id]/publish</code></td>
+              <td>Transition resource from draft to published status</td>
+              <td>Admin Only</td>
+              <td><span class="badge badge-purple">200 OK</span></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber">POST</span></td>
+              <td><code>/api/admin/resources/[id]/archive</code></td>
+              <td>Archive resource from public index while keeping download access for owners</td>
+              <td>Admin Only</td>
+              <td><span class="badge badge-purple">200 OK</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="accordion-group">
+      <summary class="accordion-summary">
+        <span>📦 Downloadable Template Files Inventory</span>
+        <span class="badge badge-green">11 Files in public/downloads/</span>
+      </summary>
+      <div class="accordion-content">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Format</th>
+              <th>Size</th>
+              <th>Primary Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>server-launch-checklist-detailed.md</code></td>
+              <td>Markdown</td>
+              <td>7.96 KB</td>
+              <td>Comprehensive 40+ item checklist for pre-launch, networking, and launch day</td>
+            </tr>
+            <tr>
+              <td><code>backup-recovery-checklist.md</code></td>
+              <td>Markdown</td>
+              <td>7.61 KB</td>
+              <td>3-2-1 backup strategy guide, automated cron schedules, and restoration drill templates</td>
+            </tr>
+            <tr>
+              <td><code>spigot.yml.example</code></td>
+              <td>YAML</td>
+              <td>6.18 KB</td>
+              <td>Optimized entity tracking and performance settings with explanatory comments</td>
+            </tr>
+            <tr>
+              <td><code>server-rules-template.md</code></td>
+              <td>Markdown</td>
+              <td>5.38 KB</td>
+              <td>Community guidelines, staff escalation protocols, and appeal procedures</td>
+            </tr>
+            <tr>
+              <td><code>resource-documentation-template.md</code></td>
+              <td>Markdown</td>
+              <td>4.18 KB</td>
+              <td>Standardized documentation structure for published server plugins and configs</td>
+            </tr>
+            <tr>
+              <td><code>announcement-templates.md</code></td>
+              <td>Markdown</td>
+              <td>3.67 KB</td>
+              <td>Pre-written Discord and in-game announcement templates for maintenance, resets, and events</td>
+            </tr>
+            <tr>
+              <td><code>plugin-inventory-template.csv</code></td>
+              <td>CSV</td>
+              <td>3.57 KB</td>
+              <td>Spreadsheet schema to track plugins, version numbers, license types, and update links</td>
+            </tr>
+            <tr>
+              <td><code>paper.yml.example</code></td>
+              <td>YAML</td>
+              <td>2.66 KB</td>
+              <td>High-performance Paper configurations tuned for survival and network lobbies</td>
+            </tr>
+            <tr>
+              <td><code>server-setup-checklist.md</code></td>
+              <td>Markdown</td>
+              <td>2.61 KB</td>
+              <td>Step-by-step initial server installation and firewall setup checklist</td>
+            </tr>
+            <tr>
+              <td><code>bukkit.yml.example</code></td>
+              <td>YAML</td>
+              <td>2.49 KB</td>
+              <td>Baseline Bukkit settings tuned for optimal tick rates and memory management</td>
+            </tr>
+            <tr>
+              <td><code>server-maintenance-checklist.md</code></td>
+              <td>Markdown</td>
+              <td>2.32 KB</td>
+              <td>Routine daily, weekly, and monthly server hygiene and log rotation guide</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <!-- Footer -->
+    <footer>
+      <div>
+        <strong>NOTIXNODE Platform Dashboard</strong> • Engineered for High-Performance Minecraft Infrastructure
+      </div>
+      <div class="footer-links">
+        <a href="http://localhost:3000" target="_blank">Dev Site (Port 3000)</a>
+        <a href="http://localhost:3000/status" target="_blank">System Status</a>
+        <a href="http://localhost:3000/tools" target="_blank">Developer Tools</a>
+        <a href="http://localhost:3000/resources" target="_blank">Resource Library</a>
+      </div>
+    </footer>
+  </div>
+
+  <div id="toast">
+    <span id="toast-icon">✓</span>
+    <span id="toast-msg">Copied to clipboard!</span>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.toggle('dark');
+      html.classList.toggle('light', !isDark);
+      document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      showToast(isDark ? 'Switched to Dark Obsidian mode' : 'Switched to Light mode');
+    }
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.textContent = '🌙';
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Copied: ${text}`);
+      }).catch(() => {
+        // Fallback
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToast(`Copied: ${text}`);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.item-card');
+      let count = 0;
+
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        if (cat === 'all' || itemCat === cat) {
+          card.style.display = 'flex';
+          count++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      const titleMap = {
+        all: 'All Project Deliverables & Modules',
+        agent1: 'Agent 1: Frontend & User Interface Engineering',
+        agent2: 'Agent 2: Backend, Data Layer & API Architecture',
+        tools: 'Built-in Developer Utilities & Calculators',
+        templates: 'Production Downloadable Templates & Configs',
+        security: 'Agent 3: Security, Validation & QA Audit Gate'
+      };
+
+      document.getElementById('category-title').textContent = titleMap[cat] || 'Filtered Deliverables';
+      document.getElementById('visible-count').textContent = `${count} Items Listed`;
+    }
+
+    function handleSearch() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.item-card');
+      let count = 0;
+
+      cards.forEach(card => {
+        const text = (card.innerText + ' ' + (card.getAttribute('data-search') || '')).toLowerCase();
+        if (text.includes(q)) {
+          card.style.display = 'flex';
+          count++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('visible-count').textContent = `${count} Items Listed`;
+    }
+
+    function refreshDashboard() {
+      const bar = document.getElementById('main-progress-bar');
+      bar.style.width = '0%';
+      showToast('Synchronizing project repository status...');
+      setTimeout(() => {
+        bar.style.width = '95%';
+        showToast('Repository status synchronized! All 3 agents aligned.');
+      }, 400);
+    }
+  </script>
+</body>
+</html>

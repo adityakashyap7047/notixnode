@@ -1,0 +1,28 @@
+# ==============================================================================
+# NOTIXNODE Server Rules Configuration Template
+# Format: YAML (Compatible with in-game /rules plugins and book managers)
+# ==============================================================================
+
+version: 1.0.0
+header: "&b&l=== SERVER RULES & GUIDELINES ==="
+footer: "&7Type &b/rules <page> &7for more pages. Ignorance is no excuse."
+
+pages:
+  1:
+    title: "&e1. Community Conduct"
+    lines:
+      - "&7- Treat everyone with courtesy and fairness."
+      - "&7- Hate speech, racism, or toxicity is strictly prohibited."
+      - "&7- Real-life threats or doxxing will result in a permanent ban."
+  2:
+    title: "&e2. Gameplay Integrity"
+    lines:
+      - "&7- No hacked clients, x-ray, or unauthorized mods."
+      - "&7- Exploit and glitch abuse will result in an account reset."
+      - "&7- No griefing or raiding inside claimed territories."
+  3:
+    title: "&e3. Chat & Advertising"
+    lines:
+      - "&7- No advertising of external Discord or Minecraft servers."
+      - "&7- Avoid chat flood, caps lock spam, or begging."
+      - "&7- Follow staff moderation requests promptly."
